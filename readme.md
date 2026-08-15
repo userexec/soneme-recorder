@@ -2,7 +2,7 @@
 
 Soneme recorder is a structured voice memo app. It is organized into Series, which represent a recurring thing you want to record and contain the metadata and naming associated with it, and Recordings, which are the invididual recordings associated with a Series. Voice recording is specialized for use when one person speaking is in the same room and the others are coming through a radio speaker. The major challenge for this recording scenario is getting equivalent voice levels between the different speakers. Primarily a problem of microphone placement and keeping the radio volume adjusted appropriately.
 
-- Uses Android's AudioRecord API AutomaticGainControl feature
+- Uses Android's AudioRecord API AutomaticGainControl feature if available, but records without it if not
 - Displays a rolling RMS level
 - RMS display has a target line drawn at -12 dBFS and a peak line drawn at -6 dBFS
 - Offers a calibration feature--instead of jumping straight into a recording, you can calibrate the microphone placement first by speaking normally and seeing how you're coming through on the meter, then the problem is isolated to just using the volume control on the radio to keep everone else's voices on target.
@@ -11,21 +11,31 @@ Soneme recorder is a structured voice memo app. It is organized into Series, whi
 
 ## Application overview
 
-On first setup, application asks which storage medium you want to use to save recordings. It checks for an existing folder called SonemeRecorder in the first level of that medium and creates it if it doesn't exist. It then checks if a folder called "Miscellanous" exists inside the SonemeQSO folder and creates it if it doesn't exist.
+On first setup, application asks user to select or create a SonemeRecorder folder. If the user knows they already have one, they may select it from their storage. If they are starting fresh, they should create the folder. Once the app has a SonemeRecorder folder to use, persist the tree URI, then check if a folder called "Miscellaneous" exists inside the SonemeRecorder folder and create it if it doesn't exist.
 
 App starts in Series view.
 
 Items in Series view treat the filesystem as the source of truth. The items in series view are the folders in the SonemeRecorder folder.
 
-One series exists by default called Miscellaneous. It is not editable, and is always the last item in Recordings view. It cannot be moved up. Its subfolder is "Miscellaneous".
+One series exists by default called Miscellaneous. It is not editable, and is always the last item in Series view. It cannot be moved up. Its subfolder is "Miscellaneous".
 
 If the "Miscellaneous" folder does not exist, Soneme Recorder creates it on startup.
 
+Recording uses a JNI wrapper around LAME. Live encoding, mono 48 kHz, 96 kbps CBR.
+
 Recordings are saved as mp3 files with the following metadata:
- - title - individual recording title (defaults to pretty date with trailing parenthesized number if pretty date already exists)
+ - title - individual recording title followed by " - " and pretty date (e.g. "Test - August 14, 2026")
  - artist - Series title
  - album - Soneme Recorder
- - year - Recording start timestamp in format YYYY-MM-dd:HH:MM:SS
+ - year (TDRC) - Recording start timestamp in format 2026-08-14T18:58:23
+
+Timestamps are used throughout the application and vary in format, with conversion necessary frequently. Formats in different contexts are as follows:
+UI: Friday, August 14, 2026 06:58 PM
+filename timestamp: August 14, 2026, 18.58.23
+ID3 TDRC: 2026-08-14T18:58:23
+ID3 TIT2: [recording title] - August 14, 2026
+
+Filename timestamp is considered authoritative.
 
 ## Views
 
@@ -41,19 +51,19 @@ Recordings are saved as mp3 files with the following metadata:
 
 Header bar reads "Series"
 
-Lists the Series available to record into as items in a list. These are the subfolders of the SonemeRecorder folder.
+Lists the Series available to record into as items in a list. These are the subfolders of the SonemeRecorder folder. These are always displayed in alphabetical order.
 
 Each list item has the Series name (marquee if too long). Below the name, the number of recordings and the date of the last recording. Information is assembled directly from the filesystem and by examining dates in the filenames.
 
 #### Options menu
 
+ - Delete
+
+   Opens confirmation with message "Deleting a series will also delete all associated recordings. Be sure any recordings you want to keep are transferred off the device before deleting." Options "Cancel" (default) and "Delete".
+
  - Edit
 
    Not available for "Miscellaneous". Opens Series Edit view for this series.
-
- - Move up
-
-   Moves series up in list. Doesn't show if item is top item in list, or if focus is on "Miscellaneous" (bottom item in list)
 
  - New
 
@@ -108,9 +118,9 @@ Header bar reads the Series title
 
 Each list item has the track title (marqee if too long) with the date and time of the recording as subtext, then total track time to the right.
 
-Title and date/time are taken directly from the filenames
+Title and date/time are taken directly from the filenames. Track title is always what's after the last " - " and before the file extension. Date/time is always taken from what's between the two instances of " - ". If a file fails to follow a naming convention that allows a valid value to be pulled from its name, it is omitted from the list. Follow format or don't show up.
 
-Items are always in date order and are not reorderable.
+Items are always in date order, newest first,  and are not reorderable.
 
 #### Options menu
 
@@ -134,16 +144,19 @@ Items are always in date order and are not reorderable.
 
 #### Main Content
 
-Series title displayed along top in white bar, marquee if too long. To be saved to the "title" metadata field on the finished mp3.
-Date displayed as subtext to series title, time started added when record is pressed. Format "Friday, August 14, 2026 06:58PM". To be saved in the year metadata in format YYYY-MM-dd:HH:MM:SS on the finished mp3.
+Series title displayed along top in white bar, marquee if too long.
+Date displayed as subtext to series title, time started added when record is pressed. Format "Friday, August 14, 2026 06:58PM". To be saved in the recording's TDRC metadata in format 2026-08-14T18:58:23.
+To right, elapsed recording time. Does not increment when in Calibrate or Pause, counts up when recording.
 
-Recording widget is black background, full width, taking up most of the screen. Rolling window of RMS level showing approximately 10 seconds of audio, with current audio level on right hand side of screen, previous samples rolling to left. Bottom of widget is silence/-60 dBFS, top of widget is 0 dBFS. Level data is #4F6F8F.
+Recording widget and quick indicator widget work on RMS measurement windows of RMS over roughly 40-50ms blocks converted to dBFS.
 
-Two labeled horizontal dotted lines in white run across the widget: Target Level and Target Peak. Target Level is positioned at -12 dBFS. Target Peak is positioned at -6 dBFS. They are on top of the level data.
+Recording widget is black background, full width, taking up most of the screen. Rolling display of RMS level representing approximately 10 seconds of audio, with current audio level on right hand side of screen, previous measurement windows rolling to left. Bottom of widget is silence/-60 dBFS, top of widget is 0 dBFS. Level data is #4F6F8F.
+
+Two labeled horizontal dotted lines in white run across the widget: Target Level and Target Peak. Target Level is positioned at -12 dBFS. Target Peak is positioned at -6 dBFS. They are on top of the widget and are purely decorative/for reference.
 
 Level quick indicator is a two-layered bar at the bottom of the screen that averages the sample levels seen over the past 5 seconds. The background layer of the bar is light gray, and the foreground layer is a variable color and opacity.
-Opacity is controlled by the proportion of samples that were over -40 dBFS, simple true false. If all samples were over, 100% opacity, if no samples were over, 0% opacity, and if 50% of samples were over, 50% opacity.
-Color is determined by the average level of samples that were over -40 dBFS, with any that were at or below being recorded as -40 dBFS. Bar color is in RGB with intermediary values for each channel between 0 and 255 occurring only in certain ranges of average dBFS.
+Opacity is controlled by the proportion of measurement windows that were over -40 dBFS, simple true false. If all measurement windows were over, 100% opacity, if none were over, 0% opacity, and if 50% were over, 50% opacity.
+Color is determined by the average level of measurement windows that were over -40 dBFS, with any that were at or below being recorded as -40 dBFS. Bar color is in RGB with intermediary values for each channel between 0 and 255 occurring only in certain ranges of average dBFS.
 Red:
 <= -12 dBFS - 0
 \>= -6 dBFS - 255
@@ -155,7 +168,9 @@ Blue:
 <= -18 dBFS - 255
 \>= -12 dBFS - 0
 
-Time start is the time the actual recording starts, not the time Recorder view is opened.
+Time start is the time the actual recording starts, not the time Recorder view is opened or when Calibrate is used.
+
+For screen closed or recorder losing foreground: Make an active real recording a foreground microphone service, so closing the flip or turning off the display doesn't terminate the recording. Not necessary for Calibrate, only for Record. The foregrounding is retained through Pause/Resume.
 
 #### Options Menu
 
@@ -168,11 +183,17 @@ Time start is the time the actual recording starts, not the time Recorder view i
    If recording has not yet started, middle options menu control is Calibrate/Done.
    Pressing Calibrate starts a throwaway recording allowing you to see the recording widget active and determine your audio levels. Pressing Done clears the widget, throws away any audio data for this recording, and switches button back to Calibrate.
    If recording has started, middle options menu control is Pause/Resume.
-   Pressing Pause temporarily stops recording and changes middle options menu button to Resume. Resume restarts recording.
+   Pressing Pause temporarily discards the PCM instead of feeding it to the MP3 encoder until Resume is pressed. Recording widget continues to display audio data, but new audio is not recorded. Change middle options menu button to Resume and show a "Not recording" box over the recording widget. Pressing Resume resumes normal recording, changes middle options menu button back to Pause, and removes the "Not recording" box.
 
  - Record/Finish
 
-   Starts and ends recording. On Finish:
+   Starts and ends recording. 
+   
+   On Record:
+   - If currently calibrating (Calibrate has been clicked and Done is shown for middle options menu button), end calibration as if Done was pressed.
+   - Switch middle options menu button to Pause/Resume
+
+   On Finish:
    - end recording
    - pop up box with Title field. Title field must be safe to use in a filename and may not contain the sequence " - ".
    - change options menu to (blank) (blank) Save
@@ -180,6 +201,7 @@ Time start is the time the actual recording starts, not the time Recorder view i
    on Save pressed, if Title has a value
    
    - show saving... popup
+   - Create recording's metadata title field as "[title] - [pretty date]"
    - save file to series folder as "[series] - [pretty date/time] - [title].mp3"
    
    on file save complete
@@ -208,7 +230,9 @@ Time start is the time the actual recording starts, not the time Recorder view i
 
 #### Main Content
 
-Literally just the Soneme Audiobooks player minus the tab bar.
+Literally just the Soneme Audiobooks player minus the tab bar and minus persistence.
+
+Data like playback position, sleep timer, repeat behavior, seek intervals, speed, etc. are discarded if player is exited. App doesn't need to remember data for individual files, just start the player as if it's the first time it's seen this file.
 
 Check image at https://github.com/userexec/soneme-audiobooks/raw/master/screenshot-player.png?raw=true for a visual layout of these features.
 
