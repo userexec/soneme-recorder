@@ -13,7 +13,9 @@ Soneme recorder is a structured voice memo app. It is organized into Series, whi
 
 On first setup, application asks user to select or create a SonemeRecorder folder. If the user knows they already have one, they may select it from their storage. If they are starting fresh, they should create the folder. Once the app has a SonemeRecorder folder to use, persist the tree URI, then check if a folder called "Miscellaneous" exists inside the SonemeRecorder folder and create it if it doesn't exist.
 
-App starts in Series view.
+On startup, app scans SonemeRecorder folder and subfolders and checks for any files starting with "TEMP". For each, display a message "Interrupted recording from [date/time] found in [series]. Please enter a title." and a title box with same limitations and validation as the Recorder view's title box. Options menu buttons Discard (blank) Save. Discard deletes the TEMP file and moves on, Save performs the normal finishing process on the TEMP file of creating the ID3v2.4 header, copying the already-encoded MP3 frames after it from the TEMP file, and saving with the normal filename for a finished recording.
+
+App then lands on Series view and waits for interaction.
 
 Items in Series view treat the filesystem as the source of truth. The items in series view are the folders in the SonemeRecorder folder.
 
@@ -22,6 +24,9 @@ One series exists by default called Miscellaneous. It is not editable, and is al
 If the "Miscellaneous" folder does not exist, Soneme Recorder creates it on startup.
 
 Recording uses a JNI wrapper around LAME. Live encoding, mono 48 kHz, 96 kbps CBR.
+
+Metadata uses an ID3v2.4 header which is created separately. LAME is used only for MP3 encoding and the header is created separately.
+Recordings are live-encoded into a temporary MP3 inside the selected series folder with a filename intentionally outside the normal filename grammar: "TEMP _ [series] _ [timestamp].mp3". On recording save, the final real file is created with the normal naming by writing the ID3v2.4 tag first and copying the already-encoded MP3 frames after it, then deleting the temporary file.
 
 Recordings are saved as mp3 files with the following metadata:
  - title - individual recording title followed by " - " and pretty date (e.g. "Test - August 14, 2026")
@@ -59,7 +64,7 @@ Each list item has the Series name (marquee if too long). Below the name, the nu
 
  - Delete
 
-   Opens confirmation with message "Deleting a series will also delete all associated recordings. Be sure any recordings you want to keep are transferred off the device before deleting." Options "Cancel" (default) and "Delete".
+   Not available for "Miscellaneous". Opens confirmation with message "Deleting a series will also delete all associated recordings. Be sure any recordings you want to keep are transferred off the device before deleting." Options "Cancel" (default) and "Delete".
 
  - Edit
 
@@ -140,7 +145,7 @@ Items are always in date order, newest first,  and are not reorderable.
 
 #### Controls
 
-- If recording has not yet begun, back returns to Recordings view without saving. Once recording has begun back is disabled.
+- If recording or calibration is not in progress, back returns to Recordings view without saving. Once calibration or recording has begun (including recording pause state), back is disabled. Calibration must be ended or recording must be finished to go back.
 
 #### Main Content
 
@@ -170,13 +175,13 @@ Blue:
 
 Time start is the time the actual recording starts, not the time Recorder view is opened or when Calibrate is used.
 
-For screen closed or recorder losing foreground: Make an active real recording a foreground microphone service, so closing the flip or turning off the display doesn't terminate the recording. Not necessary for Calibrate, only for Record. The foregrounding is retained through Pause/Resume.
+For screen closed or recorder losing foreground: Make an active real recording a foreground microphone service, so closing the flip or turning off the display doesn't terminate the recording. Not necessary for Calibrate, only for Record. The foregrounding is retained through Pause/Resume. If a real recording service exists, launching/resuming Soneme Recorder always returns directly to its live Recorder screen, not Series. Service owns start time, elapsed duration, pause state, encoder state, and recent RMS windows--the Activity merely reconnects and redraws them. If Calibrate loses the foreground, calibration should simply stop/discard.
 
 #### Options Menu
 
  - Cancel
   
-   Returns to Recordings view without saving
+   Changes to (blank) when calibration or recording is in progress. If calibration or recording is not in progress, pressing Cancel returns to Recordings view without saving.
 
  - Calibrate/Done, Pause/Resume
 
@@ -195,14 +200,15 @@ For screen closed or recorder losing foreground: Make an active real recording a
 
    On Finish:
    - end recording
-   - pop up box with Title field. Title field must be safe to use in a filename and may not contain the sequence " - ".
-   - change options menu to (blank) (blank) Save
+   - pop up box with Title field. Title field must be safe to use in a filename and may not contain the sequence " - " or a trailing period. If unsafe characters detected or " - " or trailing period are detected, Save option blanks until corrected and a tooltip 'Special characters and " - " disallowed in titles' is shown. Technically not truthful, but helpful enough.
+   - change options menu to Discard (blank) Save
    
-   on Save pressed, if Title has a value
+   on Discard pressed, discard recording and return to Recordings view.
+   on Save pressed, if Title has no value use "Untitled" as value, then:
    
    - show saving... popup
    - Create recording's metadata title field as "[title] - [pretty date]"
-   - save file to series folder as "[series] - [pretty date/time] - [title].mp3"
+   - save file to series folder as "[series] - [pretty date/time] - [title].mp3". If file of same name already exists, just overwrite it since if it has the same name then it can't be longer than a second anyway and was a mistake.
    
    on file save complete
    
@@ -230,7 +236,7 @@ For screen closed or recorder losing foreground: Make an active real recording a
 
 #### Main Content
 
-Literally just the Soneme Audiobooks player minus the tab bar and minus persistence.
+Literally just the Soneme Audiobooks player minus the tab, and minus persistence, and minus stored data per track like last sleep timer set.
 
 Data like playback position, sleep timer, repeat behavior, seek intervals, speed, etc. are discarded if player is exited. App doesn't need to remember data for individual files, just start the player as if it's the first time it's seen this file.
 
@@ -258,4 +264,4 @@ Sleep and repeat changes via keypad controls should have matching haptics to Son
 
  - Sleep
 
-   Menu with options for Off, Resume at last timer set, 10 minutes, 30 minutes, 1 hour, 2 hours, 3 hours, 4 hours, 8 hours, 12 hours. Timer begins whenever set, audio pauses when timer runs out. Back button exits modal without setting (sleep timer already in progress should not be affected). Default setting Off.
+   Menu with options for Off, 10 minutes, 30 minutes, 1 hour, 2 hours, 3 hours, 4 hours, 8 hours, 12 hours. Timer begins whenever set, audio pauses when timer runs out. Back button exits modal without setting (sleep timer already in progress should not be affected). Default setting Off.
