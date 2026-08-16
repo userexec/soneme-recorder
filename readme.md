@@ -11,7 +11,7 @@ Soneme recorder is a structured voice memo app. It is organized into Series, whi
 
 ## Target device properties
 
-The Sonim XP3900 has the following constraints:
+Soneme Recorder targets the Sonim XP3900 only. It has the following constraints:
 
 - 240x320
 - Android 11 Go
@@ -22,9 +22,17 @@ The Sonim XP3900 has the following constraints:
 
 ## Application overview
 
-On first setup, application asks user to select or create a SonemeRecorder folder. If the user knows they already have one, they may select it from their storage. If they are starting fresh, they should create the folder. Once the app has a SonemeRecorder folder to use, persist the tree URI, then check if a folder called "Miscellaneous" exists inside the SonemeRecorder folder and create it if it doesn't exist.
+On first setup, application asks the user to select a storage folder. Resolve the actual Recorder root as follows:
+- If the selected folder itself is named "SonemeRecorder" (case-insensitive), use it.
+- Otherwise, if the selected folder already contains a child folder named "SonemeRecorder" (case-insensitive), use that existing child.
+- Otherwise, create a new "SonemeRecorder" child folder inside the selected folder and use it.
+Persist access to the selected storage tree and remember the resolved SonemeRecorder folder within it. Do not create a second SonemeRecorder folder merely because an existing one uses different capitalization, and do not rename an existing case variant just to normalize capitalization.
 
-On startup, app scans SonemeRecorder folder and immediate subfolders and checks for any files starting with "TEMP". For each, display a message "Interrupted recording from [date/time] found in [series]. Please enter a title." and a title box with same limitations and validation as the Recorder view's title box. Options menu buttons Discard (blank) Save. Discard deletes the TEMP file and moves on, Save performs the normal finishing process on the TEMP file of creating the ID3v2.4 header, copying the already-encoded MP3 frames after it from the TEMP file, and saving with the normal filename for a finished recording.
+On startup, first remove orphaned save-staging files in immediate Series folders, but only when the filename exactly matches Recorder's staging grammar: "SAVING _ [UUID].mp3", where UUID is a standard UUID string. Files that merely start with "SAVING" are not touched.
+
+On startup, scan the immediate Series folders for interrupted recordings, but only recognize files whose names fully match Recorder's temporary grammar: "TEMP _ [series] _ [timestamp].mp3" with a valid filename timestamp. The containing Series folder is authoritative for the Series name; the series text embedded in the TEMP filename is informational only. Files that merely start with "TEMP" or otherwise fail the temporary filename grammar are ignored.
+
+For each recognized TEMP file, scan the MP3 stream through the last complete valid frame and ignore any incomplete trailing frame left by an interrupted encoder. If there are no complete valid MP3 frames, offer Discard only. Otherwise display a message "Interrupted recording from [date/time] found in [series]. Please enter a title." and a title box with the same limitations and validation as the Recorder view's title box. Options menu buttons Discard (blank) Save. Discard deletes the TEMP file and moves on. Save performs the normal crash-safe finishing process described below, copying only complete valid MP3 frames.
 
 If the SonemeRecorder folder is not available (e.g. SD card removed), offer to either re-run first-time setup or exit the application.
 
@@ -32,11 +40,11 @@ App then lands on Series view and waits for interaction.
 
 Items in Series view treat the filesystem as the source of truth. The items in series view are the folders in the SonemeRecorder folder.
 
-One series exists by default called Miscellaneous. It is not editable, and is always the last item in Series view. It cannot be moved up. Its subfolder is "Miscellaneous".
+One series exists by default called Miscellaneous. It is not editable, and is always the last item in Series view. It cannot be moved up. Its subfolder is normally "Miscellaneous".
 
-If the "Miscellaneous" folder does not exist, Soneme Recorder creates it on startup.
+Any case variant of "Miscellaneous" is recognized as this same reserved Series and pinned last. If a case variant already exists, use it without renaming it and do not create a second Miscellaneous folder. If no case-insensitive match exists, Soneme Recorder creates "Miscellaneous" on startup.
 
-Recording uses a JNI wrapper around LAME. Live encoding, mono 48 kHz, 96 kbps CBR.
+Recording uses a JNI wrapper around LAME. Live encoding, mono 48 kHz, 96 kbps CBR. Disable LAME Xing/Info tag generation; Recorder creates its own metadata separately and the temporary output is a frame stream only.
 
 Audio pipeline is:
 AudioRecord
@@ -51,8 +59,12 @@ AudioRecord
        │
        └── LAME → 96 kbps mono CBR MP3
 
+If AGC is unavailable or cannot be created/enabled for the active AudioRecord session, continue silently without it. No warning, setting, or status indicator is needed.
+
 Metadata uses an ID3v2.4 header which is created separately. LAME is used only for MP3 encoding and the header is created separately.
-Recordings are live-encoded into a temporary MP3 inside the selected series folder with a filename intentionally outside the normal filename grammar: "TEMP _ [series] _ [timestamp].mp3". On recording save, the final real file is created with the normal naming by writing the ID3v2.4 tag first and copying the already-encoded MP3 frames after it, then deleting the temporary file.
+Recordings are live-encoded into a temporary MP3 inside the selected series folder with a filename intentionally outside the normal filename grammar: "TEMP _ [series] _ [timestamp].mp3". The containing folder is authoritative for Series identity; the series component in the TEMP filename is informational.
+
+Saving is transactional. Write the finished ID3v2.4 header and complete MP3 frames copied from TEMP to a staging file named "SAVING _ [UUID].mp3" in the Series folder. Generate the UUID with `java.util.UUID.randomUUID()`; it is ephemeral transaction state only and is never part of a recording's persistent identity or database. Completely write and close the staging file, replace any existing same-named finished recording, rename the staging file to the normal finished filename, and only then delete the original TEMP file. If any save/commit step fails, do not delete TEMP so the recording remains recoverable.
 
 Recordings are saved as mp3 files with the following metadata:
  - title - individual recording title followed by " - " and pretty date (e.g. "Test - August 14, 2026")
@@ -82,19 +94,21 @@ Filename timestamp is considered authoritative. Date format should always be gen
 
 Header bar reads "Series"
 
-Lists the Series available to record into as items in a list. These are the subfolders of the SonemeRecorder folder. These are always displayed in alphabetical order with the exception of Miscellaneous, which is always pinned last.
+Lists the Series available to record into as items in a list. These are the subfolders of the SonemeRecorder folder. These are always displayed in alphabetical order with the exception of Miscellaneous (recognized case-insensitively), which is always pinned last.
 
-Each list item has the Series name (marquee if too long). Below the name, the number of valid recordings (correctly-named mp3 files within that series' folder), and the date of the most recent recording. Information is assembled directly from the filesystem and by examining dates in the filenames.
+A valid finished recording must both have a filename that parses according to Recorder's finished filename grammar and be recognized by Android as playable audio with a usable duration. Malformed, corrupt, or unrelated files are left untouched but do not appear or count anywhere in Recorder. TEMP and SAVING files never count as finished recordings.
+
+Each list item has the Series name (marquee if too long). Below the name, the number of valid recordings within that series' folder, and the date of the most recent valid recording in format "August 15, 2026". Information is assembled directly from the filesystem and by examining dates in the filenames; the filename timestamp is authoritative.
 
 #### Options menu
 
  - Delete
 
-   Not available for "Miscellaneous". Opens confirmation with message "Deleting a series will also delete all associated recordings. Be sure any recordings you want to keep are transferred off the device before deleting." Options "Cancel" (default) and "Delete".
+   Not available for "Miscellaneous" (case-insensitive). Opens confirmation with message "Deleting a series will also delete all files in its folder. Be sure anything you want to keep is transferred off the device before deleting." Options "Cancel" (default) and "Delete". Confirming recursively deletes the entire Series folder and everything in it, including files Recorder does not recognize. After deletion, focus the item that moved into the deleted item's position; if the deleted item was last, focus the new last item.
 
  - Edit
 
-   Not available for "Miscellaneous". Opens Series Edit view for this series.
+   Not available for "Miscellaneous" (case-insensitive). Opens Series Edit view for this series.
 
  - New
 
@@ -105,16 +119,20 @@ Each list item has the Series name (marquee if too long). Below the name, the nu
 
 #### Controls
 
+ - While the Series title field owns text focus, Back performs the field's normal backspace behavior.
+ - Otherwise, Back is equivalent to Cancel and discards unsaved edits.
+
 #### Main Content
 
-Series title field, to be saved to the "artist" metadata field on new recordings. Contents of this field must be safe to use as a folder name and may not contain the sequence " - ".
+Series title field, to be saved to the "artist" metadata field on new recordings. Series title must be nonblank and valid as a filesystem component. Reject control characters, `/`, `\`, `:`, `*`, `?`, `"`, `<`, `>`, `|`, the sequence " - ", leading or trailing whitespace, a trailing period, and the exact names `.` or `..`. The UTF-8 encoded folder name must not exceed 255 bytes.
+Series names are unique case-insensitively. Reject a new or renamed Series if its name collides case-insensitively with another Series. Any case variant of "Miscellaneous" is reserved and cannot be created or renamed through Series Edit.
 Just the one field--very short main content.
 
 Helpful notes on series titles:
 
 Title is used as a folder name.
-If series already exists and is saved, change the previous folder name to the new one.
-If new series, create a new folder for this series.
+If series already exists and is saved, rename the previous folder to the new name. If the provider/filesystem refuses the rename, leave the old folder untouched, stay in Series Edit, and show "Could not rename series." Do not fall back to copying into a new folder.
+If new series, create a new folder for this series. If creation fails, stay in Series Edit and show "Could not create series."
 
 Recordings will go into this folder. It's important that it be an actual folder on the storage medium of choice since the files will presumably be transferred to a NAS with Soneme Sync.
 
@@ -124,11 +142,11 @@ Changes only apply to the filenames and metadata of new recordings. The app does
 
  - Delete
 
-   Opens confirmation with message "Deleting a series will also delete all associated recordings. Be sure any recordings you want to keep are transferred off the device before deleting." Options "Cancel" (default) and "Delete".
+   Opens confirmation with message "Deleting a series will also delete all files in its folder. Be sure anything you want to keep is transferred off the device before deleting." Options "Cancel" (default) and "Delete". Confirming recursively deletes the entire Series folder and everything in it. After deletion, return to Series and focus the item that moved into the deleted item's position; if the deleted item was last, focus the new last item.
 
  - Cancel
 
-   Returns to Series view with this Series focused
+   Returns to Series view with this Series focused and discards unsaved edits.
 
  - Save
 
@@ -147,17 +165,17 @@ Changes only apply to the filenames and metadata of new recordings. The app does
 
 Header bar reads the Series title
 
-Each list item has the track title (marqee if too long) with the date and time of the recording as subtext, then total track time to the right.
+Each list item has the track title (marqee if too long) with the date and time of the recording as subtext in format "Friday, August 15, 2026 10:14 PM", then total track time to the right.
 
-Title and date/time are taken directly from the filenames. Track title is always what's after the last " - " and before the file extension. Date/time is always taken from what's between the two instances of " - ". If a file fails to follow a naming convention that allows a valid value to be pulled from its name, it is omitted from the list. Follow format or don't show up.
+Title and date/time are taken directly from the filenames. Track title is always what's after the last " - " and before the file extension. Date/time is always taken from what's between the two instances of " - ". A file is shown only if its filename parses according to Recorder's finished filename grammar and Android recognizes it as playable audio with a usable duration. Files that fail either test are omitted from the list and left untouched. Follow format or don't show up.
 
-Items are always in date order, newest first,  and are not reorderable.
+Items are always in date order, newest first, and are not reorderable. If there are no valid recordings, show an empty state with New still available.
 
 #### Options menu
 
  - Delete
    
-   Opens confirmation with message "Delete [name]?" Options "Cancel" (default) and "Delete"
+   Opens confirmation with message "Delete [name]?" Options "Cancel" (default) and "Delete". After deletion, focus the item that moved into the deleted item's position; if the deleted item was last, focus the new last item. If no recordings remain, show the empty state.
  
  - Play
 
@@ -175,7 +193,7 @@ Items are always in date order, newest first,  and are not reorderable.
 
 #### Main Content
 
-On first Calibrate or Record, request RECORD_AUDIO so that the actual recording belongs to the foreground microphone service. Minimal notification of "Recording: [series]"
+On first Calibrate or Record, request RECORD_AUDIO. A real recording belongs to the foreground microphone service. Use a minimal notification of "Recording: [series]". If AGC is unavailable or fails to enable for the active AudioRecord session, continue silently without it.
 
 Series title displayed along top in white bar, marquee if too long.
 Date displayed as subtext to series title, time started added when record is pressed. Format "Friday, August 14, 2026 06:58 PM". To be saved in the recording's TDRC metadata in format 2026-08-14T18:58:23.
@@ -183,14 +201,14 @@ To right, elapsed recording time. Does not increment when in Calibrate or Pause,
 
 Recording widget and quick indicator widget work on RMS measurement windows of RMS over 2048 PCM samples converted to dBFS. Maximum dBFS is 0, minimum is -60. Any values that fall outside this range are clamped to the maximum or minimum bounds respectively.
 
-Recording widget is black background, full width, taking up most of the screen. Rolling display of RMS level representing approximately 10 seconds of audio, with current audio level on right hand side of screen, previous measurement windows rolling to left. Bottom of widget is silence/-60 dBFS, top of widget is 0 dBFS. Level data is #4F6F8F.
+Recording widget is black background, full width, taking up most of the screen. Rolling display of RMS level representing approximately 10 seconds of audio, with current audio level on right hand side of screen, previous measurement windows rolling to left. Bottom of widget is silence/-60 dBFS, top of widget is 0 dBFS. Level data is #4F6F8F. During the first 10 seconds, use only measurement windows that actually exist and progressively fill the graph; do not pad the unwritten history with silence.
 
 Two labeled horizontal dotted lines in white run across the widget: Target Level and Target Peak. Target Level is positioned at -12 dBFS. Target Peak is positioned at -6 dBFS. They are on top of the widget and are purely decorative/for reference.
 
-Level quick indicator is a two-layered bar at the bottom of the screen that averages the sample levels seen over the past 5 seconds. The background layer of the bar is light gray, and the foreground layer is a variable color and opacity.
+Level quick indicator is a two-layered bar at the bottom of the screen that averages the sample levels seen over the past 5 seconds. The background layer of the bar is light gray, and the foreground layer is a variable color and opacity. During the first 5 seconds, calculate both values only from measurement windows that actually exist; do not pad the dataset with silence.
 The level indicator adjusts two values, opacity and color, using two independent formulas.
 Opacity is controlled by the proportion of measurement windows that were over -40 dBFS, simple true false. If all measurement windows were over, 100% opacity, if none were over, 0% opacity, and if 50% were over, 50% opacity.
-Color is determined by the average level of measurement windows that were over -40 dBFS, with any that were at or below being recorded as -40 dBFS so that they're included in the average. Bar color is in RGB with intermediary values for each channel between 0 and 255 occurring only in certain ranges of average dBFS.
+Color is determined by the average of all measurement windows in the 5-second dataset, with every window at or below -40 dBFS clamped to -40 dBFS before averaging. These quiet windows intentionally remain in the average so the displayed color fades toward the low-level end rather than jumping rapidly between active-sound values. Bar color is in RGB with intermediary values for each channel between 0 and 255 occurring only in certain ranges of average dBFS.
 Red:
 <= -12 dBFS - 0
 \>= -6 dBFS - 255
@@ -206,7 +224,7 @@ Time start is the time the actual recording starts, not the time Recorder view i
 
 For screen closed or recorder losing foreground: Make an active real recording a foreground microphone service, so closing the flip or turning off the display doesn't terminate the recording. Not necessary for Calibrate, only for Record. The foregrounding is retained through Pause/Resume. If a real recording service exists, launching/resuming Soneme Recorder always returns directly to its live Recorder screen, not Series. Service owns start time, elapsed duration, pause state, encoder state, and recent RMS windows--the Activity merely reconnects and redraws them. If Calibrate loses the foreground, calibration should simply stop/discard.
 
-On recording failure in microphone capture, LAME, storage writing, or other part of recording pipeline, stop immediately rather than silently continue. Preserve whatever TEMP data was successfully written, end the foreground service, and report that the recording was interrupted. If there are valid MP3 frames, it can go through the same recovery/title process.
+On recording failure in microphone capture, LAME, storage writing, or other part of recording pipeline, stop immediately rather than silently continue. Preserve whatever TEMP data was successfully written, end the foreground service, and report that the recording was interrupted. If there are complete valid MP3 frames, it can go through the same recovery/title process; if there are zero complete frames, delete/discard the unusable TEMP instead of offering recovery.
 
 #### Options Menu
 
@@ -217,7 +235,7 @@ On recording failure in microphone capture, LAME, storage writing, or other part
  - Calibrate/Done, Pause/Resume
 
    If recording has not yet started, middle options menu control is Calibrate/Done.
-   Pressing Calibrate starts a throwaway recording allowing you to see the recording widget active and determine your audio levels. Pressing Done clears the widget, throws away any audio data for this recording, and switches button back to Calibrate.
+   Pressing Calibrate starts the same AudioRecord + AGC + RMS capture path used for a real recording, but discards the PCM after metering. Calibration does not start LAME and does not create a TEMP file. Pressing Done clears the widget, discards calibration state, and switches button back to Calibrate.
    If recording has started, middle options menu control is Pause/Resume.
    Pressing Pause temporarily discards the PCM instead of feeding it to the MP3 encoder until Resume is pressed. Recording widget continues to display audio data, but new audio is not recorded. Change middle options menu button to Resume and show a "Not recording" box over the recording widget. Pressing Resume resumes normal recording, changes middle options menu button back to Pause, and removes the "Not recording" box.
 
@@ -230,8 +248,11 @@ On recording failure in microphone capture, LAME, storage writing, or other part
    - Switch middle options menu button to Pause/Resume
 
    On Finish:
-   - end recording
-   - pop up box with Title field. Title field must be safe to use in a filename and may not contain the sequence " - " or a trailing period. If unsafe characters detected or " - " or trailing period are detected, Save option blanks until corrected and a tooltip 'Special characters and " - " disallowed in titles' is shown. Technically not truthful, but helpful enough. Back button should not be disabled when curosr is in the title field, as back is used as backspace. If cursor is not in the title field, back remains disabled.
+   - end recording and flush/finalize the LAME stream.
+   - If the TEMP contains zero complete valid MP3 frames, delete the unusable TEMP, show "No audio was recorded.", and return to the idle Recorder screen without opening the title dialog.
+   - Otherwise pop up a box with a Title field. Recording title may be blank; blank becomes "Untitled" on Save. For nonblank titles, reject control characters, `/`, `\`, `:`, `*`, `?`, `"`, `<`, `>`, `|`, the sequence " - ", leading or trailing whitespace, a trailing period, and the exact names `.` or `..`.
+   - The complete generated filename "[series] - [pretty date/time] - [title].mp3" (using "Untitled" when the title field is blank) must not exceed 255 bytes when UTF-8 encoded. If it would, blank the Save option and show "Title is too long." For other invalid title content, blank Save until corrected and show the existing helpful validation message.
+   - Back button should not be disabled when cursor is in the title field, as Back is used as backspace. If cursor is not in the title field, Back remains disabled; the only exits are Discard or Save.
    - change options menu to Discard (blank) Save
    
    on Discard pressed, discard recording and return to Recordings view.
@@ -239,7 +260,8 @@ On recording failure in microphone capture, LAME, storage writing, or other part
    
    - show saving... popup
    - Create recording's metadata title field as "[title] - [pretty date]"
-   - save file to series folder as "[series] - [pretty date/time] - [title].mp3". If file of same name already exists, just overwrite it since if it has the same name then it can't be longer than a second anyway and was a mistake.
+   - final filename is "[series] - [pretty date/time] - [title].mp3". If a finished file of the same name already exists, replace it.
+   - perform the transactional SAVING-file process described in Application overview: write ID3v2.4 + the complete TEMP MP3 frames to "SAVING _ [UUID].mp3", fully close it, replace any existing final file, rename staging to the final filename, then delete TEMP. If the operation fails before completion, keep TEMP and report the save failure so the recording remains recoverable.
    
    on file save complete
    
@@ -250,13 +272,13 @@ On recording failure in microphone capture, LAME, storage writing, or other part
 
 #### Controls
 
- - Back button goes to Recordings view.
+ - Back button goes to Recordings view, stops playback, and destroys the current temporary Player session and all of its settings/state.
  - D-pad navigates clickable elements
  - 1 button rewinds 10 seconds
- - 2 button starts previous recording in series at 0:00 if previous exists, or last recording in series at 0:00 if currently playing is first in series. Does nothing if only one recording in series.
+ - 2 button starts the previous recording in display order at 0:00 if previous exists, or the last recording in display order at 0:00 if currently playing is first. Does nothing if only one recording is in the series.
  - 3 button fast-forwards 10 seconds
  - 4 button rewinds 60 seconds
- - 5 button starts next recording in series at 0:00 if next exists, or first recording in series at 0:00 if currently playing is last in series. Does nothing if only one recording in series.
+ - 5 button starts the next recording in display order at 0:00 if next exists, or the first recording in display order at 0:00 if currently playing is last. Does nothing if only one recording is in the series.
  - 6 button fast-forwards 60 seconds
  - 7 button rewinds 600 seconds
  - 8 button cycles repeat setting
@@ -269,7 +291,11 @@ On recording failure in microphone capture, LAME, storage writing, or other part
 
 Literally just the Soneme Audiobooks player minus the tab, and minus persistence, and minus stored data per track like last sleep timer set.
 
-Data like playback position, sleep timer, repeat behavior, seek intervals, speed, etc. are discarded if player is exited. App doesn't need to remember data for individual files, just start the player as if it's the first time it's seen this file.
+Recordings are navigated in the same order shown in Recordings view: newest first. Previous means the row above and Next means the row below, with wrapping at either end. Repeat All follows this same display order.
+
+Closing the flip or turning off the display does not exit Player; playback continues, and reopening the phone reconnects to the same temporary Player session. Back to Recordings is what exits Player.
+
+Data like playback position, sleep timer, repeat behavior, seek intervals, speed, etc. live only for that Player session and are discarded when Player is exited with Back. Reopening a recording later starts a completely fresh Player session.
 
 Check image at https://github.com/userexec/soneme-audiobooks/raw/master/screenshot-player.png?raw=true for a visual layout of these features.
 
