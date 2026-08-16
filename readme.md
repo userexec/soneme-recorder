@@ -9,11 +9,24 @@ Soneme recorder is a structured voice memo app. It is organized into Series, whi
 - Creates a SonemeRecorder folder on the storage medium of your choice, then creates a subfolder for each Series you define. Makes for easy syncing of specific sets of recordings with Soneme Sync.
 - Recording playback is handled by the audio player from Soneme Audiobooks. Very little difference in use case here, so the existing player is perfect for it.
 
+## Target device properties
+
+The Sonim XP3900 has the following constraints:
+
+- 240x320
+- Android 11 Go
+- No touchscreen
+- Options menu softkeys
+- No Google Play Store or services
+- App must be sideloaded as an .apk
+
 ## Application overview
 
 On first setup, application asks user to select or create a SonemeRecorder folder. If the user knows they already have one, they may select it from their storage. If they are starting fresh, they should create the folder. Once the app has a SonemeRecorder folder to use, persist the tree URI, then check if a folder called "Miscellaneous" exists inside the SonemeRecorder folder and create it if it doesn't exist.
 
-On startup, app scans SonemeRecorder folder and subfolders and checks for any files starting with "TEMP". For each, display a message "Interrupted recording from [date/time] found in [series]. Please enter a title." and a title box with same limitations and validation as the Recorder view's title box. Options menu buttons Discard (blank) Save. Discard deletes the TEMP file and moves on, Save performs the normal finishing process on the TEMP file of creating the ID3v2.4 header, copying the already-encoded MP3 frames after it from the TEMP file, and saving with the normal filename for a finished recording.
+On startup, app scans SonemeRecorder folder and immediate subfolders and checks for any files starting with "TEMP". For each, display a message "Interrupted recording from [date/time] found in [series]. Please enter a title." and a title box with same limitations and validation as the Recorder view's title box. Options menu buttons Discard (blank) Save. Discard deletes the TEMP file and moves on, Save performs the normal finishing process on the TEMP file of creating the ID3v2.4 header, copying the already-encoded MP3 frames after it from the TEMP file, and saving with the normal filename for a finished recording.
+
+If the SonemeRecorder folder is not available (e.g. SD card removed), offer to either re-run first-time setup or exit the application.
 
 App then lands on Series view and waits for interaction.
 
@@ -24,6 +37,19 @@ One series exists by default called Miscellaneous. It is not editable, and is al
 If the "Miscellaneous" folder does not exist, Soneme Recorder creates it on startup.
 
 Recording uses a JNI wrapper around LAME. Live encoding, mono 48 kHz, 96 kbps CBR.
+
+Audio pipeline is:
+AudioRecord
+  AudioSource.MIC
+  PCM 16-bit
+  mono
+  48,000 Hz
+       │
+       ├── Android AGC, attached to this AudioRecord session if available
+       │
+       ├── RMS calculation / display
+       │
+       └── LAME → 96 kbps mono CBR MP3
 
 Metadata uses an ID3v2.4 header which is created separately. LAME is used only for MP3 encoding and the header is created separately.
 Recordings are live-encoded into a temporary MP3 inside the selected series folder with a filename intentionally outside the normal filename grammar: "TEMP _ [series] _ [timestamp].mp3". On recording save, the final real file is created with the normal naming by writing the ID3v2.4 tag first and copying the already-encoded MP3 frames after it, then deleting the temporary file.
@@ -40,7 +66,7 @@ filename timestamp: August 14, 2026, 18.58.23
 ID3 TDRC: 2026-08-14T18:58:23
 ID3 TIT2: [recording title] - August 14, 2026
 
-Filename timestamp is considered authoritative.
+Filename timestamp is considered authoritative. Date format should always be generated and parsed using an explicit English/US locale, regardless of the phone's locale.
 
 ## Views
 
@@ -56,9 +82,9 @@ Filename timestamp is considered authoritative.
 
 Header bar reads "Series"
 
-Lists the Series available to record into as items in a list. These are the subfolders of the SonemeRecorder folder. These are always displayed in alphabetical order.
+Lists the Series available to record into as items in a list. These are the subfolders of the SonemeRecorder folder. These are always displayed in alphabetical order with the exception of Miscellaneous, which is always pinned last.
 
-Each list item has the Series name (marquee if too long). Below the name, the number of recordings and the date of the last recording. Information is assembled directly from the filesystem and by examining dates in the filenames.
+Each list item has the Series name (marquee if too long). Below the name, the number of valid recordings (correctly-named mp3 files within that series' folder), and the date of the most recent recording. Information is assembled directly from the filesystem and by examining dates in the filenames.
 
 #### Options menu
 
@@ -149,19 +175,22 @@ Items are always in date order, newest first,  and are not reorderable.
 
 #### Main Content
 
+On first Calibrate or Record, request RECORD_AUDIO so that the actual recording belongs to the foreground microphone service. Minimal notification of "Recording: [series]"
+
 Series title displayed along top in white bar, marquee if too long.
-Date displayed as subtext to series title, time started added when record is pressed. Format "Friday, August 14, 2026 06:58PM". To be saved in the recording's TDRC metadata in format 2026-08-14T18:58:23.
+Date displayed as subtext to series title, time started added when record is pressed. Format "Friday, August 14, 2026 06:58 PM". To be saved in the recording's TDRC metadata in format 2026-08-14T18:58:23.
 To right, elapsed recording time. Does not increment when in Calibrate or Pause, counts up when recording.
 
-Recording widget and quick indicator widget work on RMS measurement windows of RMS over roughly 40-50ms blocks converted to dBFS.
+Recording widget and quick indicator widget work on RMS measurement windows of RMS over 2048 PCM samples converted to dBFS. Maximum dBFS is 0, minimum is -60. Any values that fall outside this range are clamped to the maximum or minimum bounds respectively.
 
 Recording widget is black background, full width, taking up most of the screen. Rolling display of RMS level representing approximately 10 seconds of audio, with current audio level on right hand side of screen, previous measurement windows rolling to left. Bottom of widget is silence/-60 dBFS, top of widget is 0 dBFS. Level data is #4F6F8F.
 
 Two labeled horizontal dotted lines in white run across the widget: Target Level and Target Peak. Target Level is positioned at -12 dBFS. Target Peak is positioned at -6 dBFS. They are on top of the widget and are purely decorative/for reference.
 
 Level quick indicator is a two-layered bar at the bottom of the screen that averages the sample levels seen over the past 5 seconds. The background layer of the bar is light gray, and the foreground layer is a variable color and opacity.
+The level indicator adjusts two values, opacity and color, using two independent formulas.
 Opacity is controlled by the proportion of measurement windows that were over -40 dBFS, simple true false. If all measurement windows were over, 100% opacity, if none were over, 0% opacity, and if 50% were over, 50% opacity.
-Color is determined by the average level of measurement windows that were over -40 dBFS, with any that were at or below being recorded as -40 dBFS. Bar color is in RGB with intermediary values for each channel between 0 and 255 occurring only in certain ranges of average dBFS.
+Color is determined by the average level of measurement windows that were over -40 dBFS, with any that were at or below being recorded as -40 dBFS so that they're included in the average. Bar color is in RGB with intermediary values for each channel between 0 and 255 occurring only in certain ranges of average dBFS.
 Red:
 <= -12 dBFS - 0
 \>= -6 dBFS - 255
@@ -176,6 +205,8 @@ Blue:
 Time start is the time the actual recording starts, not the time Recorder view is opened or when Calibrate is used.
 
 For screen closed or recorder losing foreground: Make an active real recording a foreground microphone service, so closing the flip or turning off the display doesn't terminate the recording. Not necessary for Calibrate, only for Record. The foregrounding is retained through Pause/Resume. If a real recording service exists, launching/resuming Soneme Recorder always returns directly to its live Recorder screen, not Series. Service owns start time, elapsed duration, pause state, encoder state, and recent RMS windows--the Activity merely reconnects and redraws them. If Calibrate loses the foreground, calibration should simply stop/discard.
+
+On recording failure in microphone capture, LAME, storage writing, or other part of recording pipeline, stop immediately rather than silently continue. Preserve whatever TEMP data was successfully written, end the foreground service, and report that the recording was interrupted. If there are valid MP3 frames, it can go through the same recovery/title process.
 
 #### Options Menu
 
@@ -200,7 +231,7 @@ For screen closed or recorder losing foreground: Make an active real recording a
 
    On Finish:
    - end recording
-   - pop up box with Title field. Title field must be safe to use in a filename and may not contain the sequence " - " or a trailing period. If unsafe characters detected or " - " or trailing period are detected, Save option blanks until corrected and a tooltip 'Special characters and " - " disallowed in titles' is shown. Technically not truthful, but helpful enough.
+   - pop up box with Title field. Title field must be safe to use in a filename and may not contain the sequence " - " or a trailing period. If unsafe characters detected or " - " or trailing period are detected, Save option blanks until corrected and a tooltip 'Special characters and " - " disallowed in titles' is shown. Technically not truthful, but helpful enough. Back button should not be disabled when curosr is in the title field, as back is used as backspace. If cursor is not in the title field, back remains disabled.
    - change options menu to Discard (blank) Save
    
    on Discard pressed, discard recording and return to Recordings view.
