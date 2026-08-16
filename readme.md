@@ -6,9 +6,11 @@ Soneme Recorder is a small, keypad-friendly Android voice recorder built around 
 
 Recordings are organized into **Series**. A Series is a recurring thing you record—such as a radio net, meeting, interview series, class, or other regular event. Each Series is an ordinary folder on the phone, and each finished recording is an ordinary MP3 inside it.
 
-Recorder was designed particularly for situations where **one speaker is physically in the room and the other speakers are coming through a radio or other loudspeaker**. In that situation, getting reasonably consistent voice levels is mostly a matter of microphone placement and adjusting the speaker volume. Recorder provides a live RMS history, target guides, a large quick level indicator (think of it as an at-a-glance "Magic Eye" display), and a disposable calibration mode to make that much easier.
+Recorder was designed particularly for situations where **one speaker is physically in the room and the other speakers are coming through a radio or other loudspeaker**. In that situation, getting reasonably consistent voice levels is mostly a matter of microphone placement and adjusting the speaker volume. Recorder provides a live RMS history, target guides, a large quick level indicator (think of it as an at-a-glance "Magic Eye" display that fades and changes color), and a disposable calibration mode to make that much easier.
 
-It is designed specifically for the **Sonim XP3plus XP3900**. There are no touch controls for the main interface. A normal Android phone is not a target and probably will not have the Sonim softkeys Recorder expects.
+When a recording is finished, consider [Soneme Sync](https://githumb.com/userexec/soneme-sync) to quickly sync it to your NAS.
+
+Soneme Recorder is designed specifically for the **Sonim XP3plus XP3900**. There are no touch controls for the main interface. A normal Android phone is not a target and probably will not have the Sonim softkeys Recorder expects.
 
 ![Series view](https://github.com/userexec/soneme-recorder/blob/master/screenshot-series.png?raw=true)  ![Recordings view](https://github.com/userexec/soneme-recorder/blob/master/screenshot-recordings.png?raw=true)  ![Recording example](https://github.com/userexec/soneme-recorder/blob/master/screenshot-recording-1.png?raw=true)  ![Recording example](https://github.com/userexec/soneme-recorder/blob/master/screenshot-recording-2.png?raw=true)  ![Recording example](https://github.com/userexec/soneme-recorder/blob/master/screenshot-recording-3.png?raw=true)  ![Player view](https://github.com/userexec/soneme-recorder/blob/master/screenshot-player.png?raw=true)
 
