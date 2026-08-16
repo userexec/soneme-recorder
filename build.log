@@ -1,0 +1,856 @@
+> Task :app:preBuild UP-TO-DATE
+> Task :app:preDebugBuild UP-TO-DATE
+> Task :app:mergeDebugNativeDebugMetadata NO-SOURCE
+> Task :app:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :app:checkDebugAarMetadata UP-TO-DATE
+> Task :app:generateDebugResValues UP-TO-DATE
+> Task :app:mapDebugSourceSetPaths UP-TO-DATE
+> Task :app:generateDebugResources UP-TO-DATE
+> Task :app:mergeDebugResources UP-TO-DATE
+> Task :app:packageDebugResources UP-TO-DATE
+> Task :app:parseDebugLocalResources UP-TO-DATE
+> Task :app:createDebugCompatibleScreenManifests UP-TO-DATE
+> Task :app:extractDeepLinksDebug UP-TO-DATE
+> Task :app:processDebugMainManifest UP-TO-DATE
+> Task :app:processDebugManifest UP-TO-DATE
+> Task :app:processDebugManifestForPackage UP-TO-DATE
+> Task :app:processDebugResources UP-TO-DATE
+> Task :app:javaPreCompileDebug UP-TO-DATE
+> Task :app:mergeDebugShaders UP-TO-DATE
+> Task :app:compileDebugShaders NO-SOURCE
+> Task :app:generateDebugAssets UP-TO-DATE
+> Task :app:mergeDebugAssets UP-TO-DATE
+> Task :app:compressDebugAssets UP-TO-DATE
+> Task :app:desugarDebugFileDependencies UP-TO-DATE
+> Task :app:checkDebugDuplicateClasses UP-TO-DATE
+> Task :app:mergeExtDexDebug UP-TO-DATE
+> Task :app:mergeLibDexDebug UP-TO-DATE
+> Task :app:configureCMakeDebug[arm64-v8a]
+
+> Task :app:buildCMakeDebug[arm64-v8a] FAILED
+C/C++: ninja: Entering directory `/home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a'
+C/C++: /home/administrator/build/android-sdk/ndk/27.0.12077973/toolchains/llvm/prebuilt/linux-x86_64/bin/clang --target=aarch64-none-linux-android30 --sysroot=/home/administrator/build/android-sdk/ndk/27.0.12077973/toolchains/llvm/prebuilt/linux-x86_64/sysroot -Dsoneme_lame_EXPORTS -I/home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3 -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security  -fno-limit-debug-info  -fPIC -MD -MT CMakeFiles/soneme_lame.dir/_deps/lame_android-src/app/src/main/cpp/lamemp3/newmdct.c.o -MF CMakeFiles/soneme_lame.dir/_deps/lame_android-src/app/src/main/cpp/lamemp3/newmdct.c.o.d -o CMakeFiles/soneme_lame.dir/_deps/lame_android-src/app/src/main/cpp/lamemp3/newmdct.c.o -c /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/newmdct.c
+C/C++: /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/newmdct.c:985:21: error: call to undeclared library function 'memset' with type 'void *(void *, int, unsigned long)'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
+C/C++:   985 |                     memset(mdct_enc, 0, 18 * sizeof(FLOAT));
+C/C++:       |                     ^
+C/C++: /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/newmdct.c:985:21: note: include the header <string.h> or explicitly provide a declaration for 'memset'
+C/C++: /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/newmdct.c:1036:13: error: call to undeclared library function 'memcpy' with type 'void *(void *, const void *, unsigned long)'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
+C/C++:  1036 |             memcpy(esv->sb_sample[ch][0], esv->sb_sample[ch][1], 576 * sizeof(FLOAT));
+C/C++:       |             ^
+C/C++: /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/newmdct.c:1036:13: note: include the header <string.h> or explicitly provide a declaration for 'memcpy'
+C/C++: 2 errors generated.
+C/C++: /home/administrator/build/android-sdk/ndk/27.0.12077973/toolchains/llvm/prebuilt/linux-x86_64/bin/clang --target=aarch64-none-linux-android30 --sysroot=/home/administrator/build/android-sdk/ndk/27.0.12077973/toolchains/llvm/prebuilt/linux-x86_64/sysroot -Dsoneme_lame_EXPORTS -I/home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3 -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security  -fno-limit-debug-info  -fPIC -MD -MT CMakeFiles/soneme_lame.dir/_deps/lame_android-src/app/src/main/cpp/lamemp3/id3tag.c.o -MF CMakeFiles/soneme_lame.dir/_deps/lame_android-src/app/src/main/cpp/lamemp3/id3tag.c.o.d -o CMakeFiles/soneme_lame.dir/_deps/lame_android-src/app/src/main/cpp/lamemp3/id3tag.c.o -c /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/id3tag.c
+C/C++: /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/id3tag.c:227:25: error: call to undeclared library function 'strlen' with type 'unsigned long (const char *)'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
+C/C++:   227 |     const size_t lenb = strlen(b);
+C/C++:       |                         ^
+C/C++: /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/id3tag.c:227:25: note: include the header <string.h> or explicitly provide a declaration for 'strlen'
+C/C++: /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/id3tag.c:285:5: error: call to undeclared library function 'memset' with type 'void *(void *, int, unsigned long)'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
+C/C++:   285 |     memset(&gfc->tag_spec, 0, sizeof gfc->tag_spec);
+C/C++:       |     ^
+C/C++: /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/id3tag.c:285:5: note: include the header <string.h> or explicitly provide a declaration for 'memset'
+C/C++: /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/id3tag.c:383:5: error: call to undeclared library function 'free' with type 'void (void *)'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
+C/C++:   383 |     free(*dst);
+C/C++:       |     ^
+C/C++: /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/id3tag.c:383:5: note: include the header <stdlib.h> or explicitly provide a declaration for 'free'
+C/C++: /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/id3tag.c:391:20: error: call to undeclared library function 'calloc' with type 'void *(unsigned long, unsigned long)'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
+C/C++:   391 |             *dst = lame_calloc(char, n + 1);
+C/C++:       |                    ^
+C/C++: /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/id3tag.c:63:42: note: expanded from macro 'lame_calloc'
+C/C++:    63 | #define lame_calloc(TYPE, COUNT) ((TYPE*)calloc(COUNT, sizeof(TYPE)))
+C/C++:       |                                          ^
+C/C++: /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/id3tag.c:391:20: note: include the header <stdlib.h> or explicitly provide a declaration for 'calloc'
+C/C++: /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/id3tag.c:63:42: note: expanded from macro 'lame_calloc'
+C/C++:    63 | #define lame_calloc(TYPE, COUNT) ((TYPE*)calloc(COUNT, sizeof(TYPE)))
+C/C++:       |                                          ^
+C/C++: /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/id3tag.c:393:17: error: call to undeclared library function 'memcpy' with type 'void *(void *, const void *, unsigned long)'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
+C/C++:   393 |                 memcpy(*dst, src, n * sizeof(**dst));
+C/C++:       |                 ^
+C/C++: /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/id3tag.c:393:17: note: include the header <string.h> or explicitly provide a declaration for 'memcpy'
+C/C++: /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/id3tag.c:509:19: error: call to undeclared library function 'strtol' with type 'long (const char *, char **, int)'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
+C/C++:   509 |     int     num = strtol(genre, &str, 10);
+C/C++:       |                   ^
+C/C++: /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/id3tag.c:509:19: note: include the header <stdlib.h> or explicitly provide a declaration for 'strtol'
+C/C++: /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/id3tag.c:594:45: error: call to undeclared library function 'strncmp' with type 'int (const char *, const char *, unsigned long)'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
+C/C++:   594 |     else if (4 < size && data[0] == 0x89 && strncmp((const char *) &data[1], "PNG", 3) == 0) {
+C/C++:       |                                             ^
+C/C++: /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/id3tag.c:594:45: note: include the header <string.h> or explicitly provide a declaration for 'strncmp'
+C/C++: /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/id3tag.c:1074:23: error: call to undeclared function 'atoi'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
+C/C++:  1074 |         int     num = atoi(year);
+C/C++:       |                       ^
+C/C++: /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/id3tag.c:1113:23: error: call to undeclared function 'atoi'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
+C/C++:  1113 |         int     num = atoi(track);
+C/C++:       |                       ^
+C/C++: 9 errors generated.
+C/C++: /home/administrator/build/android-sdk/ndk/27.0.12077973/toolchains/llvm/prebuilt/linux-x86_64/bin/clang --target=aarch64-none-linux-android30 --sysroot=/home/administrator/build/android-sdk/ndk/27.0.12077973/toolchains/llvm/prebuilt/linux-x86_64/sysroot -Dsoneme_lame_EXPORTS -I/home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3 -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security  -fno-limit-debug-info  -fPIC -MD -MT CMakeFiles/soneme_lame.dir/_deps/lame_android-src/app/src/main/cpp/lamemp3/util.c.o -MF CMakeFiles/soneme_lame.dir/_deps/lame_android-src/app/src/main/cpp/lamemp3/util.c.o.d -o CMakeFiles/soneme_lame.dir/_deps/lame_android-src/app/src/main/cpp/lamemp3/util.c.o -c /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/util.c
+C/C++: /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/util.c:52:9: error: call to undeclared library function 'free' with type 'void (void *)'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
+C/C++:    52 |         free(gfc->tag_spec.title);
+C/C++:       |         ^
+C/C++: /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/util.c:52:9: note: include the header <stdlib.h> or explicitly provide a declaration for 'free'
+C/C++: /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/util.c:170:28: error: call to undeclared library function 'malloc' with type 'void *(unsigned long)'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
+C/C++:   170 |             ptr->pointer = malloc(size + bytes);
+C/C++:       |                            ^
+C/C++: /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/util.c:170:28: note: include the header <stdlib.h> or explicitly provide a declaration for 'malloc'
+C/C++: /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/util.c:558:29: error: call to undeclared library function 'calloc' with type 'void *(unsigned long, unsigned long)'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
+C/C++:   558 |         esv->inbuf_old[0] = calloc(BLACKSIZE, sizeof(esv->inbuf_old[0][0]));
+C/C++:       |                             ^
+C/C++: /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/util.c:558:29: note: include the header <stdlib.h> or explicitly provide a declaration for 'calloc'
+C/C++: /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/util.c:685:13: error: call to undeclared library function 'memcpy' with type 'void *(void *, const void *, unsigned long)'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
+C/C++:   685 |             memcpy(&mfbuf[ch][mf_size], &in_buffer[ch][0], nout * sizeof(mfbuf[0][0]));
+C/C++:       |             ^
+C/C++: /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/util.c:685:13: note: include the header <string.h> or explicitly provide a declaration for 'memcpy'
+C/C++: 4 errors generated.
+C/C++: /home/administrator/build/android-sdk/ndk/27.0.12077973/toolchains/llvm/prebuilt/linux-x86_64/bin/clang --target=aarch64-none-linux-android30 --sysroot=/home/administrator/build/android-sdk/ndk/27.0.12077973/toolchains/llvm/prebuilt/linux-x86_64/sysroot -Dsoneme_lame_EXPORTS -I/home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3 -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security  -fno-limit-debug-info  -fPIC -MD -MT CMakeFiles/soneme_lame.dir/_deps/lame_android-src/app/src/main/cpp/lamemp3/takehiro.c.o -MF CMakeFiles/soneme_lame.dir/_deps/lame_android-src/app/src/main/cpp/lamemp3/takehiro.c.o.d -o CMakeFiles/soneme_lame.dir/_deps/lame_android-src/app/src/main/cpp/lamemp3/takehiro.c.o -c /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/takehiro.c
+C/C++: /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/takehiro.c:343:17: error: call to undeclared library function 'memset' with type 'void *(void *, int, unsigned long)'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
+C/C++:   343 |                 memset(&pi[cod_info->max_nonzero_coeff], 0,
+C/C++:       |                 ^
+C/C++: /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/takehiro.c:343:17: note: include the header <string.h> or explicitly provide a declaration for 'memset'
+C/C++: /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/takehiro.c:871:9: error: call to undeclared library function 'memcpy' with type 'void *(void *, const void *, unsigned long)'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
+C/C++:   871 |         memcpy(gi, cod_info2, sizeof(gr_info));
+C/C++:       |         ^
+C/C++: /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/takehiro.c:871:9: note: include the header <string.h> or explicitly provide a declaration for 'memcpy'
+C/C++: 2 errors generated.
+C/C++: /home/administrator/build/android-sdk/ndk/27.0.12077973/toolchains/llvm/prebuilt/linux-x86_64/bin/clang --target=aarch64-none-linux-android30 --sysroot=/home/administrator/build/android-sdk/ndk/27.0.12077973/toolchains/llvm/prebuilt/linux-x86_64/sysroot -Dsoneme_lame_EXPORTS -I/home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3 -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security  -fno-limit-debug-info  -fPIC -MD -MT CMakeFiles/soneme_lame.dir/_deps/lame_android-src/app/src/main/cpp/lamemp3/gain_analysis.c.o -MF CMakeFiles/soneme_lame.dir/_deps/lame_android-src/app/src/main/cpp/lamemp3/gain_analysis.c.o.d -o CMakeFiles/soneme_lame.dir/_deps/lame_android-src/app/src/main/cpp/lamemp3/gain_analysis.c.o -c /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/gain_analysis.c
+C/C++: In file included from /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/gain_analysis.c:100:
+C/C++: /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/machine.h:42:9: error: redeclaration of 'strchr' must have the 'overloadable' attribute
+C/C++:    42 | char   *strchr(), *strrchr();
+C/C++:       |         ^
+C/C++: /home/administrator/build/android-sdk/ndk/27.0.12077973/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/bits/fortify/string.h:234:17: note: previous overload of function is here
+C/C++:   234 | char* _Nullable strchr(const char* _Nonnull const s __pass_object_size, int c) __overloadable {
+C/C++:       |                 ^
+C/C++: In file included from /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/gain_analysis.c:100:
+C/C++: /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/machine.h:42:9: warning: a function declaration without a prototype is deprecated in all versions of C and is treated as a zero-parameter prototype in C23, conflicting with a previous declaration [-Wdeprecated-non-prototype]
+C/C++:    42 | char   *strchr(), *strrchr();
+C/C++:       |         ^
+C/C++: /home/administrator/build/android-sdk/ndk/27.0.12077973/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/bits/fortify/string.h:234:17: note: conflicting prototype is here
+C/C++:   234 | char* _Nullable strchr(const char* _Nonnull const s __pass_object_size, int c) __overloadable {
+C/C++:       |                 ^
+C/C++: In file included from /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/gain_analysis.c:100:
+C/C++: /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/machine.h:42:20: error: redeclaration of 'strrchr' must have the 'overloadable' attribute
+C/C++:    42 | char   *strchr(), *strrchr();
+C/C++:       |                    ^
+C/C++: /home/administrator/build/android-sdk/ndk/27.0.12077973/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/bits/fortify/string.h:246:17: note: previous overload of function is here
+C/C++:   246 | char* _Nullable strrchr(const char* _Nonnull const s __pass_object_size, int c) __overloadable {
+C/C++:       |                 ^
+C/C++: In file included from /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/gain_analysis.c:100:
+C/C++: /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/machine.h:42:20: warning: a function declaration without a prototype is deprecated in all versions of C and is treated as a zero-parameter prototype in C23, conflicting with a previous declaration [-Wdeprecated-non-prototype]
+C/C++:    42 | char   *strchr(), *strrchr();
+C/C++:       |                    ^
+C/C++: /home/administrator/build/android-sdk/ndk/27.0.12077973/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/bits/fortify/string.h:246:17: note: conflicting prototype is here
+C/C++:   246 | char* _Nullable strrchr(const char* _Nonnull const s __pass_object_size, int c) __overloadable {
+C/C++:       |                 ^
+C/C++: 2 warnings and 2 errors generated.
+C/C++: /home/administrator/build/android-sdk/ndk/27.0.12077973/toolchains/llvm/prebuilt/linux-x86_64/bin/clang --target=aarch64-none-linux-android30 --sysroot=/home/administrator/build/android-sdk/ndk/27.0.12077973/toolchains/llvm/prebuilt/linux-x86_64/sysroot -Dsoneme_lame_EXPORTS -I/home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3 -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security  -fno-limit-debug-info  -fPIC -MD -MT CMakeFiles/soneme_lame.dir/_deps/lame_android-src/app/src/main/cpp/lamemp3/lame.c.o -MF CMakeFiles/soneme_lame.dir/_deps/lame_android-src/app/src/main/cpp/lamemp3/lame.c.o.d -o CMakeFiles/soneme_lame.dir/_deps/lame_android-src/app/src/main/cpp/lamemp3/lame.c.o -c /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/lame.c
+C/C++: /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/lame.c:583:20: error: call to undeclared library function 'calloc' with type 'void *(unsigned long, unsigned long)'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
+C/C++:   583 |         gfc->ATH = calloc(1, sizeof(ATH_t));
+C/C++:       |                    ^
+C/C++: /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/lame.c:583:20: note: include the header <stdlib.h> or explicitly provide a declaration for 'calloc'
+C/C++: /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/lame.c:628:13: warning: using floating point absolute value function 'fabs' when argument is of integer type [-Wabsolute-value]
+C/C++:   628 |         if (EQ(gfp->compression_ratio, 0))
+C/C++:       |             ^
+C/C++: /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/machine.h:168:12: note: expanded from macro 'EQ'
+C/C++:   168 | (fabs(a) > fabs(b)) \
+C/C++:       |            ^
+C/C++: /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/lame.c:628:13: note: use function 'abs' instead
+C/C++: /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/machine.h:168:12: note: expanded from macro 'EQ'
+C/C++:   168 | (fabs(a) > fabs(b)) \
+C/C++:       |            ^
+C/C++: /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/lame.c:628:13: note: include the header <stdlib.h> or explicitly provide a declaration for 'abs'
+C/C++: /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/machine.h:168:12: note: expanded from macro 'EQ'
+C/C++:   168 | (fabs(a) > fabs(b)) \
+C/C++:       |            ^
+C/C++: /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/lame.c:628:13: warning: using floating point absolute value function 'fabs' when argument is of integer type [-Wabsolute-value]
+C/C++:   628 |         if (EQ(gfp->compression_ratio, 0))
+C/C++:       |             ^
+C/C++: /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/machine.h:170:23: note: expanded from macro 'EQ'
+C/C++:   170 |  : (fabs((a)-(b)) <= (fabs(b) * 1e-6f)))
+C/C++:       |                       ^
+C/C++: /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/lame.c:628:13: note: use function 'abs' instead
+C/C++: /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/machine.h:170:23: note: expanded from macro 'EQ'
+C/C++:   170 |  : (fabs((a)-(b)) <= (fabs(b) * 1e-6f)))
+C/C++:       |                       ^
+C/C++: /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/lame.c:628:13: note: include the header <stdlib.h> or explicitly provide a declaration for 'abs'
+C/C++: /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/machine.h:170:23: note: expanded from macro 'EQ'
+C/C++:   170 |  : (fabs((a)-(b)) <= (fabs(b) * 1e-6f)))
+C/C++:       |                       ^
+C/C++: /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/lame.c:1310:21: error: call to undeclared library function 'strcat' with type 'char *(char *, const char *)'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
+C/C++:  1310 |     if (*dest != 0) strcat(dest, sep);
+C/C++:       |                     ^
+C/C++: /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/lame.c:1310:21: note: include the header <string.h> or explicitly provide a declaration for 'strcat'
+C/C++: /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/lame.c:1596:13: warning: using floating point absolute value function 'fabs' when argument is of integer type [-Wabsolute-value]
+C/C++:  1596 |         if (NEQ(RadioGain, GAIN_NOT_ENOUGH_SAMPLES)) {
+C/C++:       |             ^
+C/C++: /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/machine.h:175:20: note: expanded from macro 'NEQ'
+C/C++:   175 | #define NEQ(a,b) (!EQ(a,b))
+C/C++:       |                    ^
+C/C++: /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/machine.h:168:12: note: expanded from macro 'EQ'
+C/C++:   168 | (fabs(a) > fabs(b)) \
+C/C++:       |            ^
+C/C++: /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/lame.c:1596:13: note: use function 'abs' instead
+C/C++: /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/machine.h:175:20: note: expanded from macro 'NEQ'
+C/C++:   175 | #define NEQ(a,b) (!EQ(a,b))
+C/C++:       |                    ^
+C/C++: /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/machine.h:168:12: note: expanded from macro 'EQ'
+C/C++:   168 | (fabs(a) > fabs(b)) \
+C/C++:       |            ^
+C/C++: /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/lame.c:1596:13: note: include the header <stdlib.h> or explicitly provide a declaration for 'abs'
+C/C++: /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/machine.h:175:20: note: expanded from macro 'NEQ'
+C/C++:   175 | #define NEQ(a,b) (!EQ(a,b))
+C/C++:       |                    ^
+C/C++: /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/machine.h:168:12: note: expanded from macro 'EQ'
+C/C++:   168 | (fabs(a) > fabs(b)) \
+C/C++:       |            ^
+C/C++: /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/lame.c:1596:13: warning: using floating point absolute value function 'fabs' when argument is of integer type [-Wabsolute-value]
+C/C++:  1596 |         if (NEQ(RadioGain, GAIN_NOT_ENOUGH_SAMPLES)) {
+C/C++:       |             ^
+C/C++: /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/machine.h:175:20: note: expanded from macro 'NEQ'
+C/C++:   175 | #define NEQ(a,b) (!EQ(a,b))
+C/C++:       |                    ^
+C/C++: /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/machine.h:170:23: note: expanded from macro 'EQ'
+C/C++:   170 |  : (fabs((a)-(b)) <= (fabs(b) * 1e-6f)))
+C/C++:       |                       ^
+C/C++: /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/lame.c:1596:13: note: use function 'abs' instead
+C/C++: /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/machine.h:175:20: note: expanded from macro 'NEQ'
+C/C++:   175 | #define NEQ(a,b) (!EQ(a,b))
+C/C++:       |                    ^
+C/C++: /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/machine.h:170:23: note: expanded from macro 'EQ'
+C/C++:   170 |  : (fabs((a)-(b)) <= (fabs(b) * 1e-6f)))
+C/C++:       |                       ^
+C/C++: /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/lame.c:1596:13: note: include the header <stdlib.h> or explicitly provide a declaration for 'abs'
+C/C++: /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/machine.h:175:20: note: expanded from macro 'NEQ'
+C/C++:   175 | #define NEQ(a,b) (!EQ(a,b))
+C/C++:       |                    ^
+C/C++: /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/machine.h:170:23: note: expanded from macro 'EQ'
+C/C++:   170 |  : (fabs((a)-(b)) <= (fabs(b) * 1e-6f)))
+C/C++:       |                       ^
+C/C++: /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/lame.c:1624:13: error: call to undeclared library function 'free' with type 'void (void *)'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
+C/C++:  1624 |             free(esv->in_buffer_0);
+C/C++:       |             ^
+C/C++: /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/lame.c:1624:13: note: include the header <stdlib.h> or explicitly provide a declaration for 'free'
+C/C++: /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/lame.c:2040:13: error: call to undeclared library function 'memset' with type 'void *(void *, int, unsigned long)'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
+C/C++:  2040 |             memset(gfc->ov_enc.bitrate_channelmode_hist, 0,
+C/C++:       |             ^
+C/C++: /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/lame.c:2040:13: note: include the header <string.h> or explicitly provide a declaration for 'memset'
+C/C++: 4 warnings and 4 errors generated.
+C/C++: /home/administrator/build/android-sdk/ndk/27.0.12077973/toolchains/llvm/prebuilt/linux-x86_64/bin/clang --target=aarch64-none-linux-android30 --sysroot=/home/administrator/build/android-sdk/ndk/27.0.12077973/toolchains/llvm/prebuilt/linux-x86_64/sysroot -Dsoneme_lame_EXPORTS -I/home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3 -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security  -fno-limit-debug-info  -fPIC -MD -MT CMakeFiles/soneme_lame.dir/_deps/lame_android-src/app/src/main/cpp/lamemp3/VbrTag.c.o -MF CMakeFiles/soneme_lame.dir/_deps/lame_android-src/app/src/main/cpp/lamemp3/VbrTag.c.o.d -o CMakeFiles/soneme_lame.dir/_deps/lame_android-src/app/src/main/cpp/lamemp3/VbrTag.c.o -c /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/VbrTag.c
+C/C++: /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/VbrTag.c:264:5: warning: shifting a negative signed value is undefined [-Wshift-negative-value]
+C/C++:   264 |     SHIFT_IN_BITS_VALUE(buffer[0], 8u, 0xffu);
+C/C++:       |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C/C++: /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/VbrTag.c:255:68: note: expanded from macro 'SHIFT_IN_BITS_VALUE'
+C/C++:   255 | #define SHIFT_IN_BITS_VALUE(x,n,v) ( x = (x << (n)) | ( (v) & ~(-1 << (n)) ) )
+C/C++:       |                                                                 ~~ ^
+C/C++: /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/VbrTag.c:266:5: warning: shifting a negative signed value is undefined [-Wshift-negative-value]
+C/C++:   266 |     SHIFT_IN_BITS_VALUE(buffer[1], 3u, 7);
+C/C++:       |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C/C++: /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/VbrTag.c:255:68: note: expanded from macro 'SHIFT_IN_BITS_VALUE'
+C/C++:   255 | #define SHIFT_IN_BITS_VALUE(x,n,v) ( x = (x << (n)) | ( (v) & ~(-1 << (n)) ) )
+C/C++:       |                                                                 ~~ ^
+C/C++: /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/VbrTag.c:267:5: warning: shifting a negative signed value is undefined [-Wshift-negative-value]
+C/C++:   267 |     SHIFT_IN_BITS_VALUE(buffer[1], 1u, (cfg->samplerate_out < 16000) ? 0 : 1);
+C/C++:       |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C/C++: /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/VbrTag.c:255:68: note: expanded from macro 'SHIFT_IN_BITS_VALUE'
+C/C++:   255 | #define SHIFT_IN_BITS_VALUE(x,n,v) ( x = (x << (n)) | ( (v) & ~(-1 << (n)) ) )
+C/C++:       |                                                                 ~~ ^
+C/C++: /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/VbrTag.c:268:5: warning: shifting a negative signed value is undefined [-Wshift-negative-value]
+C/C++:   268 |     SHIFT_IN_BITS_VALUE(buffer[1], 1u, cfg->version);
+C/C++:       |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C/C++: /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/VbrTag.c:255:68: note: expanded from macro 'SHIFT_IN_BITS_VALUE'
+C/C++:   255 | #define SHIFT_IN_BITS_VALUE(x,n,v) ( x = (x << (n)) | ( (v) & ~(-1 << (n)) ) )
+C/C++:       |                                                                 ~~ ^
+C/C++: /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/VbrTag.c:269:5: warning: shifting a negative signed value is undefined [-Wshift-negative-value]
+C/C++:   269 |     SHIFT_IN_BITS_VALUE(buffer[1], 2u, 4 - 3);
+C/C++:       |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C/C++: /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/VbrTag.c:255:68: note: expanded from macro 'SHIFT_IN_BITS_VALUE'
+C/C++:   255 | #define SHIFT_IN_BITS_VALUE(x,n,v) ( x = (x << (n)) | ( (v) & ~(-1 << (n)) ) )
+C/C++:       |                                                                 ~~ ^
+C/C++: /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/VbrTag.c:270:5: warning: shifting a negative signed value is undefined [-Wshift-negative-value]
+C/C++:   270 |     SHIFT_IN_BITS_VALUE(buffer[1], 1u, (!cfg->error_protection) ? 1 : 0);
+C/C++:       |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C/C++: /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/VbrTag.c:255:68: note: expanded from macro 'SHIFT_IN_BITS_VALUE'
+C/C++:   255 | #define SHIFT_IN_BITS_VALUE(x,n,v) ( x = (x << (n)) | ( (v) & ~(-1 << (n)) ) )
+C/C++:       |                                                                 ~~ ^
+C/C++: /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/VbrTag.c:272:5: warning: shifting a negative signed value is undefined [-Wshift-negative-value]
+C/C++:   272 |     SHIFT_IN_BITS_VALUE(buffer[2], 4u, eov->bitrate_index);
+C/C++:       |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C/C++: /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/VbrTag.c:255:68: note: expanded from macro 'SHIFT_IN_BITS_VALUE'
+C/C++:   255 | #define SHIFT_IN_BITS_VALUE(x,n,v) ( x = (x << (n)) | ( (v) & ~(-1 << (n)) ) )
+C/C++:       |                                                                 ~~ ^
+C/C++: /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/VbrTag.c:273:5: warning: shifting a negative signed value is undefined [-Wshift-negative-value]
+C/C++:   273 |     SHIFT_IN_BITS_VALUE(buffer[2], 2u, cfg->samplerate_index);
+C/C++:       |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C/C++: /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/VbrTag.c:255:68: note: expanded from macro 'SHIFT_IN_BITS_VALUE'
+C/C++:   255 | #define SHIFT_IN_BITS_VALUE(x,n,v) ( x = (x << (n)) | ( (v) & ~(-1 << (n)) ) )
+C/C++:       |                                                                 ~~ ^
+C/C++: /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/VbrTag.c:274:5: warning: shifting a negative signed value is undefined [-Wshift-negative-value]
+C/C++:   274 |     SHIFT_IN_BITS_VALUE(buffer[2], 1u, 0);
+C/C++:       |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C/C++: /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/VbrTag.c:255:68: note: expanded from macro 'SHIFT_IN_BITS_VALUE'
+C/C++:   255 | #define SHIFT_IN_BITS_VALUE(x,n,v) ( x = (x << (n)) | ( (v) & ~(-1 << (n)) ) )
+C/C++:       |                                                                 ~~ ^
+C/C++: /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/VbrTag.c:275:5: warning: shifting a negative signed value is undefined [-Wshift-negative-value]
+C/C++:   275 |     SHIFT_IN_BITS_VALUE(buffer[2], 1u, cfg->extension);
+C/C++:       |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C/C++: /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/VbrTag.c:255:68: note: expanded from macro 'SHIFT_IN_BITS_VALUE'
+C/C++:   255 | #define SHIFT_IN_BITS_VALUE(x,n,v) ( x = (x << (n)) | ( (v) & ~(-1 << (n)) ) )
+C/C++:       |                                                                 ~~ ^
+C/C++: /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/VbrTag.c:277:5: warning: shifting a negative signed value is undefined [-Wshift-negative-value]
+C/C++:   277 |     SHIFT_IN_BITS_VALUE(buffer[3], 2u, cfg->mode);
+C/C++:       |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C/C++: /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/VbrTag.c:255:68: note: expanded from macro 'SHIFT_IN_BITS_VALUE'
+C/C++:   255 | #define SHIFT_IN_BITS_VALUE(x,n,v) ( x = (x << (n)) | ( (v) & ~(-1 << (n)) ) )
+C/C++:       |                                                                 ~~ ^
+C/C++: /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/VbrTag.c:278:5: warning: shifting a negative signed value is undefined [-Wshift-negative-value]
+C/C++:   278 |     SHIFT_IN_BITS_VALUE(buffer[3], 2u, eov->mode_ext);
+C/C++:       |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C/C++: /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/VbrTag.c:255:68: note: expanded from macro 'SHIFT_IN_BITS_VALUE'
+C/C++:   255 | #define SHIFT_IN_BITS_VALUE(x,n,v) ( x = (x << (n)) | ( (v) & ~(-1 << (n)) ) )
+C/C++:       |                                                                 ~~ ^
+C/C++: /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/VbrTag.c:279:5: warning: shifting a negative signed value is undefined [-Wshift-negative-value]
+C/C++:   279 |     SHIFT_IN_BITS_VALUE(buffer[3], 1u, cfg->copyright);
+C/C++:       |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C/C++: /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/VbrTag.c:255:68: note: expanded from macro 'SHIFT_IN_BITS_VALUE'
+C/C++:   255 | #define SHIFT_IN_BITS_VALUE(x,n,v) ( x = (x << (n)) | ( (v) & ~(-1 << (n)) ) )
+C/C++:       |                                                                 ~~ ^
+C/C++: /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/VbrTag.c:280:5: warning: shifting a negative signed value is undefined [-Wshift-negative-value]
+C/C++:   280 |     SHIFT_IN_BITS_VALUE(buffer[3], 1u, cfg->original);
+C/C++:       |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C/C++: /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/VbrTag.c:255:68: note: expanded from macro 'SHIFT_IN_BITS_VALUE'
+C/C++:   255 | #define SHIFT_IN_BITS_VALUE(x,n,v) ( x = (x << (n)) | ( (v) & ~(-1 << (n)) ) )
+C/C++:       |                                                                 ~~ ^
+C/C++: /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/VbrTag.c:281:5: warning: shifting a negative signed value is undefined [-Wshift-negative-value]
+C/C++:   281 |     SHIFT_IN_BITS_VALUE(buffer[3], 2u, cfg->emphasis);
+C/C++:       |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C/C++: /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/VbrTag.c:255:68: note: expanded from macro 'SHIFT_IN_BITS_VALUE'
+C/C++:   255 | #define SHIFT_IN_BITS_VALUE(x,n,v) ( x = (x << (n)) | ( (v) & ~(-1 << (n)) ) )
+C/C++:       |                                                                 ~~ ^
+C/C++: /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/VbrTag.c:431:23: warning: comparison of array 'pTagData->toc' not equal to a null pointer is always true [-Wtautological-pointer-compare]
+C/C++:   431 |         if (pTagData->toc != NULL) {
+C/C++:       |             ~~~~~~~~~~^~~    ~~~~
+C/C++: /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/VbrTag.c:569:9: error: call to undeclared library function 'memset' with type 'void *(void *, int, unsigned long)'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
+C/C++:   569 |         memset(buffer, 0, sizeof(buffer));
+C/C++:       |         ^
+C/C++: /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/VbrTag.c:569:9: note: include the header <string.h> or explicitly provide a declaration for 'memset'
+C/C++: /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/VbrTag.c:805:5: error: call to undeclared library function 'strncpy' with type 'char *(char *, const char *, unsigned long)'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
+C/C++:   805 |     strncpy((char *) &pbtStreamBuffer[nBytesWritten], szVersion, 9);
+C/C++:       |     ^
+C/C++: /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/VbrTag.c:805:5: note: include the header <string.h> or explicitly provide a declaration for 'strncpy'
+C/C++: /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/VbrTag.c:882:10: error: call to undeclared library function 'strncmp' with type 'int (const char *, const char *, unsigned long)'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
+C/C++:   882 |     if (!strncmp((char *) id3v2Header, "ID3", 3)) {
+C/C++:       |          ^
+C/C++: /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/VbrTag.c:882:10: note: include the header <string.h> or explicitly provide a declaration for 'strncmp'
+C/C++: /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/VbrTag.c:993:5: error: call to undeclared library function 'memcpy' with type 'void *(void *, const void *, unsigned long)'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
+C/C++:   993 |     memcpy(&buffer[nStreamIndex], btToc, sizeof(btToc));
+C/C++:       |     ^
+C/C++: /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/VbrTag.c:993:5: note: include the header <string.h> or explicitly provide a declaration for 'memcpy'
+C/C++: 16 warnings and 4 errors generated.
+C/C++: /home/administrator/build/android-sdk/ndk/27.0.12077973/toolchains/llvm/prebuilt/linux-x86_64/bin/clang --target=aarch64-none-linux-android30 --sysroot=/home/administrator/build/android-sdk/ndk/27.0.12077973/toolchains/llvm/prebuilt/linux-x86_64/sysroot -Dsoneme_lame_EXPORTS -I/home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3 -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security  -fno-limit-debug-info  -fPIC -MD -MT CMakeFiles/soneme_lame.dir/_deps/lame_android-src/app/src/main/cpp/lamemp3/bitstream.c.o -MF CMakeFiles/soneme_lame.dir/_deps/lame_android-src/app/src/main/cpp/lamemp3/bitstream.c.o.d -o CMakeFiles/soneme_lame.dir/_deps/lame_android-src/app/src/main/cpp/lamemp3/bitstream.c.o -c /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/bitstream.c
+C/C++: /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/bitstream.c:141:5: error: call to undeclared library function 'memcpy' with type 'void *(void *, const void *, unsigned long)'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
+C/C++:   141 |     memcpy(&bs->buf[bs->buf_byte_idx], esv->header[esv->w_ptr].buf, cfg->sideinfo_len);
+C/C++:       |     ^
+C/C++: /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/bitstream.c:141:5: note: include the header <string.h> or explicitly provide a declaration for 'memcpy'
+C/C++: /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/bitstream.c:253:35: error: call to undeclared library function 'strlen' with type 'unsigned long (const char *)'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
+C/C++:   253 |             for (i = 0; i < (int) strlen(version) && remainingBits >= 8; ++i) {
+C/C++:       |                                   ^
+C/C++: /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/bitstream.c:253:35: note: include the header <string.h> or explicitly provide a declaration for 'strlen'
+C/C++: /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/bitstream.c:331:5: error: call to undeclared library function 'memset' with type 'void *(void *, int, unsigned long)'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
+C/C++:   331 |     memset(esv->header[esv->h_ptr].buf, 0, cfg->sideinfo_len);
+C/C++:       |     ^
+C/C++: /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/bitstream.c:331:5: note: include the header <string.h> or explicitly provide a declaration for 'memset'
+C/C++: 3 errors generated.
+C/C++: /home/administrator/build/android-sdk/ndk/27.0.12077973/toolchains/llvm/prebuilt/linux-x86_64/bin/clang --target=aarch64-none-linux-android30 --sysroot=/home/administrator/build/android-sdk/ndk/27.0.12077973/toolchains/llvm/prebuilt/linux-x86_64/sysroot -Dsoneme_lame_EXPORTS -I/home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3 -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security  -fno-limit-debug-info  -fPIC -MD -MT CMakeFiles/soneme_lame.dir/_deps/lame_android-src/app/src/main/cpp/lamemp3/quantize.c.o -MF CMakeFiles/soneme_lame.dir/_deps/lame_android-src/app/src/main/cpp/lamemp3/quantize.c.o.d -o CMakeFiles/soneme_lame.dir/_deps/lame_android-src/app/src/main/cpp/lamemp3/quantize.c.o -c /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/quantize.c
+C/C++: /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/quantize.c:124:5: error: call to undeclared library function 'memset' with type 'void *(void *, int, unsigned long)'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
+C/C++:   124 |     memset(&(xrpow[upper]), 0, (576 - upper) * sizeof(xrpow[0]));
+C/C++:       |     ^
+C/C++: /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/quantize.c:124:5: note: include the header <string.h> or explicitly provide a declaration for 'memset'
+C/C++: /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/quantize.c:307:9: error: call to undeclared library function 'memcpy' with type 'void *(void *, const void *, unsigned long)'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
+C/C++:   307 |         memcpy(ixwork, cod_info->xr, 576 * sizeof(FLOAT));
+C/C++:       |         ^
+C/C++: /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/quantize.c:307:9: note: include the header <string.h> or explicitly provide a declaration for 'memcpy'
+C/C++: /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/quantize.c:486:9: error: call to undeclared function 'qsort'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
+C/C++:   486 |         qsort(&work[j - width], width, sizeof(FLOAT), floatcompare);
+C/C++:       |         ^
+C/C++: /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/quantize.c:1749:9: error: call to undeclared library function 'exit' with type 'void (int) __attribute__((noreturn))'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
+C/C++:  1749 |         exit(-1);
+C/C++:       |         ^
+C/C++: /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/quantize.c:1749:9: note: include the header <stdlib.h> or explicitly provide a declaration for 'exit'
+C/C++: 4 errors generated.
+C/C++: /home/administrator/build/android-sdk/ndk/27.0.12077973/toolchains/llvm/prebuilt/linux-x86_64/bin/clang --target=aarch64-none-linux-android30 --sysroot=/home/administrator/build/android-sdk/ndk/27.0.12077973/toolchains/llvm/prebuilt/linux-x86_64/sysroot -Dsoneme_lame_EXPORTS -I/home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3 -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security  -fno-limit-debug-info  -fPIC -MD -MT CMakeFiles/soneme_lame.dir/_deps/lame_android-src/app/src/main/cpp/lamemp3/psymodel.c.o -MF CMakeFiles/soneme_lame.dir/_deps/lame_android-src/app/src/main/cpp/lamemp3/psymodel.c.o.d -o CMakeFiles/soneme_lame.dir/_deps/lame_android-src/app/src/main/cpp/lamemp3/psymodel.c.o -c /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/psymodel.c
+C/C++: /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/psymodel.c:775:5: error: call to undeclared library function 'memset' with type 'void *(void *, int, unsigned long)'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
+C/C++:   775 |     memset(&ns_hpfsmpl[0][0], 0, sizeof(ns_hpfsmpl));
+C/C++:       |     ^
+C/C++: /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/psymodel.c:775:5: note: include the header <string.h> or explicitly provide a declaration for 'memset'
+C/C++: /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/psymodel.c:1442:5: error: call to undeclared library function 'memcpy' with type 'void *(void *, const void *, unsigned long)'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
+C/C++:  1442 |     memcpy(&last_thm[0], &psv->thm[0], sizeof(last_thm));
+C/C++:       |     ^
+C/C++: /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/psymodel.c:1442:5: note: include the header <string.h> or explicitly provide a declaration for 'memcpy'
+C/C++: 2 errors generated.
+C/C++: /home/administrator/build/android-sdk/ndk/27.0.12077973/toolchains/llvm/prebuilt/linux-x86_64/bin/clang --target=aarch64-none-linux-android30 --sysroot=/home/administrator/build/android-sdk/ndk/27.0.12077973/toolchains/llvm/prebuilt/linux-x86_64/sysroot -Dsoneme_lame_EXPORTS -I/home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3 -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security  -fno-limit-debug-info  -fPIC -MD -MT CMakeFiles/soneme_lame.dir/_deps/lame_android-src/app/src/main/cpp/lamemp3/encoder.c.o -MF CMakeFiles/soneme_lame.dir/_deps/lame_android-src/app/src/main/cpp/lamemp3/encoder.c.o.d -o CMakeFiles/soneme_lame.dir/_deps/lame_android-src/app/src/main/cpp/lamemp3/encoder.c.o -c /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/encoder.c
+C/C++: /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/encoder.c:202:9: error: call to undeclared library function 'memset' with type 'void *(void *, int, unsigned long)'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
+C/C++:   202 |         memset(primebuff0, 0, sizeof(primebuff0));
+C/C++:       |         ^
+C/C++: /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/encoder.c:202:9: note: include the header <string.h> or explicitly provide a declaration for 'memset'
+C/C++: /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/encoder.c:471:17: error: call to undeclared library function 'memcpy' with type 'void *(void *, const void *, unsigned long)'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
+C/C++:   471 |                 memcpy(gfc->pinfo->xr[gr][ch], &gfc->l3_side.tt[gr][ch].xr[0], sizeof(FLOAT) * 576);
+C/C++:       |                 ^
+C/C++: /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/encoder.c:471:17: note: include the header <string.h> or explicitly provide a declaration for 'memcpy'
+C/C++: 2 errors generated.
+C/C++: /home/administrator/build/android-sdk/ndk/27.0.12077973/toolchains/llvm/prebuilt/linux-x86_64/bin/clang --target=aarch64-none-linux-android30 --sysroot=/home/administrator/build/android-sdk/ndk/27.0.12077973/toolchains/llvm/prebuilt/linux-x86_64/sysroot -Dsoneme_lame_EXPORTS -I/home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3 -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security  -fno-limit-debug-info  -fPIC -MD -MT CMakeFiles/soneme_lame.dir/_deps/lame_android-src/app/src/main/cpp/lamemp3/quantize_pvt.c.o -MF CMakeFiles/soneme_lame.dir/_deps/lame_android-src/app/src/main/cpp/lamemp3/quantize_pvt.c.o.d -o CMakeFiles/soneme_lame.dir/_deps/lame_android-src/app/src/main/cpp/lamemp3/quantize_pvt.c.o -c /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/quantize_pvt.c
+C/C++: /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/quantize_pvt.c:1057:13: error: call to undeclared library function 'memcpy' with type 'void *(void *, const void *, unsigned long)'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
+C/C++:  1057 |             memcpy(scalefac_sav, cod_info->scalefac, sizeof(scalefac_sav));
+C/C++:       |             ^
+C/C++: /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/quantize_pvt.c:1057:13: note: include the header <string.h> or explicitly provide a declaration for 'memcpy'
+C/C++: 1 error generated.
+C/C++: /home/administrator/build/android-sdk/ndk/27.0.12077973/toolchains/llvm/prebuilt/linux-x86_64/bin/clang --target=aarch64-none-linux-android30 --sysroot=/home/administrator/build/android-sdk/ndk/27.0.12077973/toolchains/llvm/prebuilt/linux-x86_64/sysroot -Dsoneme_lame_EXPORTS -I/home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3 -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security  -fno-limit-debug-info  -fPIC -MD -MT CMakeFiles/soneme_lame.dir/_deps/lame_android-src/app/src/main/cpp/lamemp3/vbrquantize.c.o -MF CMakeFiles/soneme_lame.dir/_deps/lame_android-src/app/src/main/cpp/lamemp3/vbrquantize.c.o.d -o CMakeFiles/soneme_lame.dir/_deps/lame_android-src/app/src/main/cpp/lamemp3/vbrquantize.c.o -c /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/vbrquantize.c
+C/C++: /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/vbrquantize.c:352:5: error: call to undeclared library function 'memset' with type 'void *(void *, int, unsigned long)'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
+C/C++:   352 |     memset(did_it, 0, sizeof(did_it));
+C/C++:       |     ^
+C/C++: /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/vbrquantize.c:352:5: note: include the header <string.h> or explicitly provide a declaration for 'memset'
+C/C++: /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/vbrquantize.c:994:5: error: call to undeclared library function 'exit' with type 'void (int) __attribute__((noreturn))'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
+C/C++:   994 |     exit(-1);
+C/C++:       |     ^
+C/C++: /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/vbrquantize.c:994:5: note: include the header <stdlib.h> or explicitly provide a declaration for 'exit'
+C/C++: 2 errors generated.
+
+> Task :app:compileDebugKotlin
+w: file:///home/administrator/code/soneme-recorder/app/src/main/java/com/userexec/soneme/recorder/PlaybackService.kt:347:44 'constructor(p0: Int, p1: CharSequence!, p2: PendingIntent?): Notification.Action.Builder' is deprecated. Deprecated in Java.
+w: file:///home/administrator/code/soneme-recorder/app/src/main/java/com/userexec/soneme/recorder/PlaybackService.kt:348:44 'constructor(p0: Int, p1: CharSequence!, p2: PendingIntent?): Notification.Action.Builder' is deprecated. Deprecated in Java.
+w: file:///home/administrator/code/soneme-recorder/app/src/main/java/com/userexec/soneme/recorder/PlaybackService.kt:350:44 'constructor(p0: Int, p1: CharSequence!, p2: PendingIntent?): Notification.Action.Builder' is deprecated. Deprecated in Java.
+w: file:///home/administrator/code/soneme-recorder/app/src/main/java/com/userexec/soneme/recorder/RecorderMeterView.kt:28:51 'field scaledDensity: Float' is deprecated. Deprecated in Java.
+w: file:///home/administrator/code/soneme-recorder/app/src/main/java/com/userexec/soneme/recorder/RecorderMeterView.kt:35:51 'field scaledDensity: Float' is deprecated. Deprecated in Java.
+
+[Incubating] Problems report is available at: file:///home/administrator/code/soneme-recorder/build/reports/problems/problems-report.html
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':app:buildCMakeDebug[arm64-v8a]' (registered by plugin 'com.android.internal.application').
+> com.android.ide.common.process.ProcessException: ninja: Entering directory `/home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a'
+  [0/2] Re-checking globbed directories...
+  [1/14] Building C object CMakeFiles/soneme_lame.dir/_deps/lame_android-src/app/src/main/cpp/lamemp3/newmdct.c.o
+  FAILED: CMakeFiles/soneme_lame.dir/_deps/lame_android-src/app/src/main/cpp/lamemp3/newmdct.c.o 
+  /home/administrator/build/android-sdk/ndk/27.0.12077973/toolchains/llvm/prebuilt/linux-x86_64/bin/clang --target=aarch64-none-linux-android30 --sysroot=/home/administrator/build/android-sdk/ndk/27.0.12077973/toolchains/llvm/prebuilt/linux-x86_64/sysroot -Dsoneme_lame_EXPORTS -I/home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3 -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security  -fno-limit-debug-info  -fPIC -MD -MT CMakeFiles/soneme_lame.dir/_deps/lame_android-src/app/src/main/cpp/lamemp3/newmdct.c.o -MF CMakeFiles/soneme_lame.dir/_deps/lame_android-src/app/src/main/cpp/lamemp3/newmdct.c.o.d -o CMakeFiles/soneme_lame.dir/_deps/lame_android-src/app/src/main/cpp/lamemp3/newmdct.c.o -c /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/newmdct.c
+  /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/newmdct.c:985:21: error: call to undeclared library function 'memset' with type 'void *(void *, int, unsigned long)'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
+    985 |                     memset(mdct_enc, 0, 18 * sizeof(FLOAT));
+        |                     ^
+  /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/newmdct.c:985:21: note: include the header <string.h> or explicitly provide a declaration for 'memset'
+  /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/newmdct.c:1036:13: error: call to undeclared library function 'memcpy' with type 'void *(void *, const void *, unsigned long)'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
+   1036 |             memcpy(esv->sb_sample[ch][0], esv->sb_sample[ch][1], 576 * sizeof(FLOAT));
+        |             ^
+  /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/newmdct.c:1036:13: note: include the header <string.h> or explicitly provide a declaration for 'memcpy'
+  2 errors generated.
+  [2/14] Building C object CMakeFiles/soneme_lame.dir/_deps/lame_android-src/app/src/main/cpp/lamemp3/id3tag.c.o
+  FAILED: CMakeFiles/soneme_lame.dir/_deps/lame_android-src/app/src/main/cpp/lamemp3/id3tag.c.o 
+  /home/administrator/build/android-sdk/ndk/27.0.12077973/toolchains/llvm/prebuilt/linux-x86_64/bin/clang --target=aarch64-none-linux-android30 --sysroot=/home/administrator/build/android-sdk/ndk/27.0.12077973/toolchains/llvm/prebuilt/linux-x86_64/sysroot -Dsoneme_lame_EXPORTS -I/home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3 -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security  -fno-limit-debug-info  -fPIC -MD -MT CMakeFiles/soneme_lame.dir/_deps/lame_android-src/app/src/main/cpp/lamemp3/id3tag.c.o -MF CMakeFiles/soneme_lame.dir/_deps/lame_android-src/app/src/main/cpp/lamemp3/id3tag.c.o.d -o CMakeFiles/soneme_lame.dir/_deps/lame_android-src/app/src/main/cpp/lamemp3/id3tag.c.o -c /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/id3tag.c
+  /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/id3tag.c:227:25: error: call to undeclared library function 'strlen' with type 'unsigned long (const char *)'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
+    227 |     const size_t lenb = strlen(b);
+        |                         ^
+  /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/id3tag.c:227:25: note: include the header <string.h> or explicitly provide a declaration for 'strlen'
+  /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/id3tag.c:285:5: error: call to undeclared library function 'memset' with type 'void *(void *, int, unsigned long)'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
+    285 |     memset(&gfc->tag_spec, 0, sizeof gfc->tag_spec);
+        |     ^
+  /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/id3tag.c:285:5: note: include the header <string.h> or explicitly provide a declaration for 'memset'
+  /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/id3tag.c:383:5: error: call to undeclared library function 'free' with type 'void (void *)'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
+    383 |     free(*dst);
+        |     ^
+  /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/id3tag.c:383:5: note: include the header <stdlib.h> or explicitly provide a declaration for 'free'
+  /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/id3tag.c:391:20: error: call to undeclared library function 'calloc' with type 'void *(unsigned long, unsigned long)'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
+    391 |             *dst = lame_calloc(char, n + 1);
+        |                    ^
+  /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/id3tag.c:63:42: note: expanded from macro 'lame_calloc'
+     63 | #define lame_calloc(TYPE, COUNT) ((TYPE*)calloc(COUNT, sizeof(TYPE)))
+        |                                          ^
+  /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/id3tag.c:391:20: note: include the header <stdlib.h> or explicitly provide a declaration for 'calloc'
+  /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/id3tag.c:63:42: note: expanded from macro 'lame_calloc'
+     63 | #define lame_calloc(TYPE, COUNT) ((TYPE*)calloc(COUNT, sizeof(TYPE)))
+        |                                          ^
+  /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/id3tag.c:393:17: error: call to undeclared library function 'memcpy' with type 'void *(void *, const void *, unsigned long)'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
+    393 |                 memcpy(*dst, src, n * sizeof(**dst));
+        |                 ^
+  /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/id3tag.c:393:17: note: include the header <string.h> or explicitly provide a declaration for 'memcpy'
+  /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/id3tag.c:509:19: error: call to undeclared library function 'strtol' with type 'long (const char *, char **, int)'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
+    509 |     int     num = strtol(genre, &str, 10);
+        |                   ^
+  /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/id3tag.c:509:19: note: include the header <stdlib.h> or explicitly provide a declaration for 'strtol'
+  /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/id3tag.c:594:45: error: call to undeclared library function 'strncmp' with type 'int (const char *, const char *, unsigned long)'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
+    594 |     else if (4 < size && data[0] == 0x89 && strncmp((const char *) &data[1], "PNG", 3) == 0) {
+        |                                             ^
+  /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/id3tag.c:594:45: note: include the header <string.h> or explicitly provide a declaration for 'strncmp'
+  /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/id3tag.c:1074:23: error: call to undeclared function 'atoi'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
+   1074 |         int     num = atoi(year);
+        |                       ^
+  /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/id3tag.c:1113:23: error: call to undeclared function 'atoi'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
+   1113 |         int     num = atoi(track);
+        |                       ^
+  9 errors generated.
+  [3/14] Building C object CMakeFiles/soneme_lame.dir/_deps/lame_android-src/app/src/main/cpp/lamemp3/util.c.o
+  FAILED: CMakeFiles/soneme_lame.dir/_deps/lame_android-src/app/src/main/cpp/lamemp3/util.c.o 
+  /home/administrator/build/android-sdk/ndk/27.0.12077973/toolchains/llvm/prebuilt/linux-x86_64/bin/clang --target=aarch64-none-linux-android30 --sysroot=/home/administrator/build/android-sdk/ndk/27.0.12077973/toolchains/llvm/prebuilt/linux-x86_64/sysroot -Dsoneme_lame_EXPORTS -I/home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3 -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security  -fno-limit-debug-info  -fPIC -MD -MT CMakeFiles/soneme_lame.dir/_deps/lame_android-src/app/src/main/cpp/lamemp3/util.c.o -MF CMakeFiles/soneme_lame.dir/_deps/lame_android-src/app/src/main/cpp/lamemp3/util.c.o.d -o CMakeFiles/soneme_lame.dir/_deps/lame_android-src/app/src/main/cpp/lamemp3/util.c.o -c /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/util.c
+  /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/util.c:52:9: error: call to undeclared library function 'free' with type 'void (void *)'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
+     52 |         free(gfc->tag_spec.title);
+        |         ^
+  /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/util.c:52:9: note: include the header <stdlib.h> or explicitly provide a declaration for 'free'
+  /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/util.c:170:28: error: call to undeclared library function 'malloc' with type 'void *(unsigned long)'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
+    170 |             ptr->pointer = malloc(size + bytes);
+        |                            ^
+  /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/util.c:170:28: note: include the header <stdlib.h> or explicitly provide a declaration for 'malloc'
+  /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/util.c:558:29: error: call to undeclared library function 'calloc' with type 'void *(unsigned long, unsigned long)'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
+    558 |         esv->inbuf_old[0] = calloc(BLACKSIZE, sizeof(esv->inbuf_old[0][0]));
+        |                             ^
+  /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/util.c:558:29: note: include the header <stdlib.h> or explicitly provide a declaration for 'calloc'
+  /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/util.c:685:13: error: call to undeclared library function 'memcpy' with type 'void *(void *, const void *, unsigned long)'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
+    685 |             memcpy(&mfbuf[ch][mf_size], &in_buffer[ch][0], nout * sizeof(mfbuf[0][0]));
+        |             ^
+  /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/util.c:685:13: note: include the header <string.h> or explicitly provide a declaration for 'memcpy'
+  4 errors generated.
+  [4/14] Building C object CMakeFiles/soneme_lame.dir/_deps/lame_android-src/app/src/main/cpp/lamemp3/takehiro.c.o
+  FAILED: CMakeFiles/soneme_lame.dir/_deps/lame_android-src/app/src/main/cpp/lamemp3/takehiro.c.o 
+  /home/administrator/build/android-sdk/ndk/27.0.12077973/toolchains/llvm/prebuilt/linux-x86_64/bin/clang --target=aarch64-none-linux-android30 --sysroot=/home/administrator/build/android-sdk/ndk/27.0.12077973/toolchains/llvm/prebuilt/linux-x86_64/sysroot -Dsoneme_lame_EXPORTS -I/home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3 -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security  -fno-limit-debug-info  -fPIC -MD -MT CMakeFiles/soneme_lame.dir/_deps/lame_android-src/app/src/main/cpp/lamemp3/takehiro.c.o -MF CMakeFiles/soneme_lame.dir/_deps/lame_android-src/app/src/main/cpp/lamemp3/takehiro.c.o.d -o CMakeFiles/soneme_lame.dir/_deps/lame_android-src/app/src/main/cpp/lamemp3/takehiro.c.o -c /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/takehiro.c
+  /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/takehiro.c:343:17: error: call to undeclared library function 'memset' with type 'void *(void *, int, unsigned long)'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
+    343 |                 memset(&pi[cod_info->max_nonzero_coeff], 0,
+        |                 ^
+  /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/takehiro.c:343:17: note: include the header <string.h> or explicitly provide a declaration for 'memset'
+  /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/takehiro.c:871:9: error: call to undeclared library function 'memcpy' with type 'void *(void *, const void *, unsigned long)'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
+    871 |         memcpy(gi, cod_info2, sizeof(gr_info));
+        |         ^
+  /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/takehiro.c:871:9: note: include the header <string.h> or explicitly provide a declaration for 'memcpy'
+  2 errors generated.
+  [5/14] Building C object CMakeFiles/soneme_lame.dir/_deps/lame_android-src/app/src/main/cpp/lamemp3/gain_analysis.c.o
+  FAILED: CMakeFiles/soneme_lame.dir/_deps/lame_android-src/app/src/main/cpp/lamemp3/gain_analysis.c.o 
+  /home/administrator/build/android-sdk/ndk/27.0.12077973/toolchains/llvm/prebuilt/linux-x86_64/bin/clang --target=aarch64-none-linux-android30 --sysroot=/home/administrator/build/android-sdk/ndk/27.0.12077973/toolchains/llvm/prebuilt/linux-x86_64/sysroot -Dsoneme_lame_EXPORTS -I/home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3 -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security  -fno-limit-debug-info  -fPIC -MD -MT CMakeFiles/soneme_lame.dir/_deps/lame_android-src/app/src/main/cpp/lamemp3/gain_analysis.c.o -MF CMakeFiles/soneme_lame.dir/_deps/lame_android-src/app/src/main/cpp/lamemp3/gain_analysis.c.o.d -o CMakeFiles/soneme_lame.dir/_deps/lame_android-src/app/src/main/cpp/lamemp3/gain_analysis.c.o -c /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/gain_analysis.c
+  In file included from /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/gain_analysis.c:100:
+  /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/machine.h:42:9: error: redeclaration of 'strchr' must have the 'overloadable' attribute
+     42 | char   *strchr(), *strrchr();
+        |         ^
+  /home/administrator/build/android-sdk/ndk/27.0.12077973/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/bits/fortify/string.h:234:17: note: previous overload of function is here
+    234 | char* _Nullable strchr(const char* _Nonnull const s __pass_object_size, int c) __overloadable {
+        |                 ^
+  In file included from /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/gain_analysis.c:100:
+  /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/machine.h:42:9: warning: a function declaration without a prototype is deprecated in all versions of C and is treated as a zero-parameter prototype in C23, conflicting with a previous declaration [-Wdeprecated-non-prototype]
+     42 | char   *strchr(), *strrchr();
+        |         ^
+  /home/administrator/build/android-sdk/ndk/27.0.12077973/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/bits/fortify/string.h:234:17: note: conflicting prototype is here
+    234 | char* _Nullable strchr(const char* _Nonnull const s __pass_object_size, int c) __overloadable {
+        |                 ^
+  In file included from /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/gain_analysis.c:100:
+  /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/machine.h:42:20: error: redeclaration of 'strrchr' must have the 'overloadable' attribute
+     42 | char   *strchr(), *strrchr();
+        |                    ^
+  /home/administrator/build/android-sdk/ndk/27.0.12077973/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/bits/fortify/string.h:246:17: note: previous overload of function is here
+    246 | char* _Nullable strrchr(const char* _Nonnull const s __pass_object_size, int c) __overloadable {
+        |                 ^
+  In file included from /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/gain_analysis.c:100:
+  /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/machine.h:42:20: warning: a function declaration without a prototype is deprecated in all versions of C and is treated as a zero-parameter prototype in C23, conflicting with a previous declaration [-Wdeprecated-non-prototype]
+     42 | char   *strchr(), *strrchr();
+        |                    ^
+  /home/administrator/build/android-sdk/ndk/27.0.12077973/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/bits/fortify/string.h:246:17: note: conflicting prototype is here
+    246 | char* _Nullable strrchr(const char* _Nonnull const s __pass_object_size, int c) __overloadable {
+        |                 ^
+  2 warnings and 2 errors generated.
+  [6/14] Building C object CMakeFiles/soneme_lame.dir/_deps/lame_android-src/app/src/main/cpp/lamemp3/lame.c.o
+  FAILED: CMakeFiles/soneme_lame.dir/_deps/lame_android-src/app/src/main/cpp/lamemp3/lame.c.o 
+  /home/administrator/build/android-sdk/ndk/27.0.12077973/toolchains/llvm/prebuilt/linux-x86_64/bin/clang --target=aarch64-none-linux-android30 --sysroot=/home/administrator/build/android-sdk/ndk/27.0.12077973/toolchains/llvm/prebuilt/linux-x86_64/sysroot -Dsoneme_lame_EXPORTS -I/home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3 -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security  -fno-limit-debug-info  -fPIC -MD -MT CMakeFiles/soneme_lame.dir/_deps/lame_android-src/app/src/main/cpp/lamemp3/lame.c.o -MF CMakeFiles/soneme_lame.dir/_deps/lame_android-src/app/src/main/cpp/lamemp3/lame.c.o.d -o CMakeFiles/soneme_lame.dir/_deps/lame_android-src/app/src/main/cpp/lamemp3/lame.c.o -c /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/lame.c
+  /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/lame.c:583:20: error: call to undeclared library function 'calloc' with type 'void *(unsigned long, unsigned long)'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
+    583 |         gfc->ATH = calloc(1, sizeof(ATH_t));
+        |                    ^
+  /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/lame.c:583:20: note: include the header <stdlib.h> or explicitly provide a declaration for 'calloc'
+  /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/lame.c:628:13: warning: using floating point absolute value function 'fabs' when argument is of integer type [-Wabsolute-value]
+    628 |         if (EQ(gfp->compression_ratio, 0))
+        |             ^
+  /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/machine.h:168:12: note: expanded from macro 'EQ'
+    168 | (fabs(a) > fabs(b)) \
+        |            ^
+  /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/lame.c:628:13: note: use function 'abs' instead
+  /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/machine.h:168:12: note: expanded from macro 'EQ'
+    168 | (fabs(a) > fabs(b)) \
+        |            ^
+  /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/lame.c:628:13: note: include the header <stdlib.h> or explicitly provide a declaration for 'abs'
+  /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/machine.h:168:12: note: expanded from macro 'EQ'
+    168 | (fabs(a) > fabs(b)) \
+        |            ^
+  /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/lame.c:628:13: warning: using floating point absolute value function 'fabs' when argument is of integer type [-Wabsolute-value]
+    628 |         if (EQ(gfp->compression_ratio, 0))
+        |             ^
+  /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/machine.h:170:23: note: expanded from macro 'EQ'
+    170 |  : (fabs((a)-(b)) <= (fabs(b) * 1e-6f)))
+        |                       ^
+  /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/lame.c:628:13: note: use function 'abs' instead
+  /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/machine.h:170:23: note: expanded from macro 'EQ'
+    170 |  : (fabs((a)-(b)) <= (fabs(b) * 1e-6f)))
+        |                       ^
+  /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/lame.c:628:13: note: include the header <stdlib.h> or explicitly provide a declaration for 'abs'
+  /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/machine.h:170:23: note: expanded from macro 'EQ'
+    170 |  : (fabs((a)-(b)) <= (fabs(b) * 1e-6f)))
+        |                       ^
+  /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/lame.c:1310:21: error: call to undeclared library function 'strcat' with type 'char *(char *, const char *)'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
+   1310 |     if (*dest != 0) strcat(dest, sep);
+        |                     ^
+  /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/lame.c:1310:21: note: include the header <string.h> or explicitly provide a declaration for 'strcat'
+  /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/lame.c:1596:13: warning: using floating point absolute value function 'fabs' when argument is of integer type [-Wabsolute-value]
+   1596 |         if (NEQ(RadioGain, GAIN_NOT_ENOUGH_SAMPLES)) {
+        |             ^
+  /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/machine.h:175:20: note: expanded from macro 'NEQ'
+    175 | #define NEQ(a,b) (!EQ(a,b))
+        |                    ^
+  /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/machine.h:168:12: note: expanded from macro 'EQ'
+    168 | (fabs(a) > fabs(b)) \
+        |            ^
+  /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/lame.c:1596:13: note: use function 'abs' instead
+  /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/machine.h:175:20: note: expanded from macro 'NEQ'
+    175 | #define NEQ(a,b) (!EQ(a,b))
+        |                    ^
+  /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/machine.h:168:12: note: expanded from macro 'EQ'
+    168 | (fabs(a) > fabs(b)) \
+        |            ^
+  /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/lame.c:1596:13: note: include the header <stdlib.h> or explicitly provide a declaration for 'abs'
+  /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/machine.h:175:20: note: expanded from macro 'NEQ'
+    175 | #define NEQ(a,b) (!EQ(a,b))
+        |                    ^
+  /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/machine.h:168:12: note: expanded from macro 'EQ'
+    168 | (fabs(a) > fabs(b)) \
+        |            ^
+  /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/lame.c:1596:13: warning: using floating point absolute value function 'fabs' when argument is of integer type [-Wabsolute-value]
+   1596 |         if (NEQ(RadioGain, GAIN_NOT_ENOUGH_SAMPLES)) {
+        |             ^
+  /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/machine.h:175:20: note: expanded from macro 'NEQ'
+    175 | #define NEQ(a,b) (!EQ(a,b))
+        |                    ^
+  /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/machine.h:170:23: note: expanded from macro 'EQ'
+    170 |  : (fabs((a)-(b)) <= (fabs(b) * 1e-6f)))
+        |                       ^
+  /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/lame.c:1596:13: note: use function 'abs' instead
+  /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/machine.h:175:20: note: expanded from macro 'NEQ'
+    175 | #define NEQ(a,b) (!EQ(a,b))
+        |                    ^
+  /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/machine.h:170:23: note: expanded from macro 'EQ'
+    170 |  : (fabs((a)-(b)) <= (fabs(b) * 1e-6f)))
+        |                       ^
+  /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/lame.c:1596:13: note: include the header <stdlib.h> or explicitly provide a declaration for 'abs'
+  /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/machine.h:175:20: note: expanded from macro 'NEQ'
+    175 | #define NEQ(a,b) (!EQ(a,b))
+        |                    ^
+  /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/machine.h:170:23: note: expanded from macro 'EQ'
+    170 |  : (fabs((a)-(b)) <= (fabs(b) * 1e-6f)))
+        |                       ^
+  /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/lame.c:1624:13: error: call to undeclared library function 'free' with type 'void (void *)'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
+   1624 |             free(esv->in_buffer_0);
+        |             ^
+  /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/lame.c:1624:13: note: include the header <stdlib.h> or explicitly provide a declaration for 'free'
+  /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/lame.c:2040:13: error: call to undeclared library function 'memset' with type 'void *(void *, int, unsigned long)'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
+   2040 |             memset(gfc->ov_enc.bitrate_channelmode_hist, 0,
+        |             ^
+  /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/lame.c:2040:13: note: include the header <string.h> or explicitly provide a declaration for 'memset'
+  4 warnings and 4 errors generated.
+  [7/14] Building C object CMakeFiles/soneme_lame.dir/_deps/lame_android-src/app/src/main/cpp/lamemp3/VbrTag.c.o
+  FAILED: CMakeFiles/soneme_lame.dir/_deps/lame_android-src/app/src/main/cpp/lamemp3/VbrTag.c.o 
+  /home/administrator/build/android-sdk/ndk/27.0.12077973/toolchains/llvm/prebuilt/linux-x86_64/bin/clang --target=aarch64-none-linux-android30 --sysroot=/home/administrator/build/android-sdk/ndk/27.0.12077973/toolchains/llvm/prebuilt/linux-x86_64/sysroot -Dsoneme_lame_EXPORTS -I/home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3 -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security  -fno-limit-debug-info  -fPIC -MD -MT CMakeFiles/soneme_lame.dir/_deps/lame_android-src/app/src/main/cpp/lamemp3/VbrTag.c.o -MF CMakeFiles/soneme_lame.dir/_deps/lame_android-src/app/src/main/cpp/lamemp3/VbrTag.c.o.d -o CMakeFiles/soneme_lame.dir/_deps/lame_android-src/app/src/main/cpp/lamemp3/VbrTag.c.o -c /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/VbrTag.c
+  /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/VbrTag.c:264:5: warning: shifting a negative signed value is undefined [-Wshift-negative-value]
+    264 |     SHIFT_IN_BITS_VALUE(buffer[0], 8u, 0xffu);
+        |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/VbrTag.c:255:68: note: expanded from macro 'SHIFT_IN_BITS_VALUE'
+    255 | #define SHIFT_IN_BITS_VALUE(x,n,v) ( x = (x << (n)) | ( (v) & ~(-1 << (n)) ) )
+        |                                                                 ~~ ^
+  /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/VbrTag.c:266:5: warning: shifting a negative signed value is undefined [-Wshift-negative-value]
+    266 |     SHIFT_IN_BITS_VALUE(buffer[1], 3u, 7);
+        |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/VbrTag.c:255:68: note: expanded from macro 'SHIFT_IN_BITS_VALUE'
+    255 | #define SHIFT_IN_BITS_VALUE(x,n,v) ( x = (x << (n)) | ( (v) & ~(-1 << (n)) ) )
+        |                                                                 ~~ ^
+  /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/VbrTag.c:267:5: warning: shifting a negative signed value is undefined [-Wshift-negative-value]
+    267 |     SHIFT_IN_BITS_VALUE(buffer[1], 1u, (cfg->samplerate_out < 16000) ? 0 : 1);
+        |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/VbrTag.c:255:68: note: expanded from macro 'SHIFT_IN_BITS_VALUE'
+    255 | #define SHIFT_IN_BITS_VALUE(x,n,v) ( x = (x << (n)) | ( (v) & ~(-1 << (n)) ) )
+        |                                                                 ~~ ^
+  /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/VbrTag.c:268:5: warning: shifting a negative signed value is undefined [-Wshift-negative-value]
+    268 |     SHIFT_IN_BITS_VALUE(buffer[1], 1u, cfg->version);
+        |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/VbrTag.c:255:68: note: expanded from macro 'SHIFT_IN_BITS_VALUE'
+    255 | #define SHIFT_IN_BITS_VALUE(x,n,v) ( x = (x << (n)) | ( (v) & ~(-1 << (n)) ) )
+        |                                                                 ~~ ^
+  /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/VbrTag.c:269:5: warning: shifting a negative signed value is undefined [-Wshift-negative-value]
+    269 |     SHIFT_IN_BITS_VALUE(buffer[1], 2u, 4 - 3);
+        |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/VbrTag.c:255:68: note: expanded from macro 'SHIFT_IN_BITS_VALUE'
+    255 | #define SHIFT_IN_BITS_VALUE(x,n,v) ( x = (x << (n)) | ( (v) & ~(-1 << (n)) ) )
+        |                                                                 ~~ ^
+  /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/VbrTag.c:270:5: warning: shifting a negative signed value is undefined [-Wshift-negative-value]
+    270 |     SHIFT_IN_BITS_VALUE(buffer[1], 1u, (!cfg->error_protection) ? 1 : 0);
+        |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/VbrTag.c:255:68: note: expanded from macro 'SHIFT_IN_BITS_VALUE'
+    255 | #define SHIFT_IN_BITS_VALUE(x,n,v) ( x = (x << (n)) | ( (v) & ~(-1 << (n)) ) )
+        |                                                                 ~~ ^
+  /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/VbrTag.c:272:5: warning: shifting a negative signed value is undefined [-Wshift-negative-value]
+    272 |     SHIFT_IN_BITS_VALUE(buffer[2], 4u, eov->bitrate_index);
+        |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/VbrTag.c:255:68: note: expanded from macro 'SHIFT_IN_BITS_VALUE'
+    255 | #define SHIFT_IN_BITS_VALUE(x,n,v) ( x = (x << (n)) | ( (v) & ~(-1 << (n)) ) )
+        |                                                                 ~~ ^
+  /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/VbrTag.c:273:5: warning: shifting a negative signed value is undefined [-Wshift-negative-value]
+    273 |     SHIFT_IN_BITS_VALUE(buffer[2], 2u, cfg->samplerate_index);
+        |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/VbrTag.c:255:68: note: expanded from macro 'SHIFT_IN_BITS_VALUE'
+    255 | #define SHIFT_IN_BITS_VALUE(x,n,v) ( x = (x << (n)) | ( (v) & ~(-1 << (n)) ) )
+        |                                                                 ~~ ^
+  /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/VbrTag.c:274:5: warning: shifting a negative signed value is undefined [-Wshift-negative-value]
+    274 |     SHIFT_IN_BITS_VALUE(buffer[2], 1u, 0);
+        |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/VbrTag.c:255:68: note: expanded from macro 'SHIFT_IN_BITS_VALUE'
+    255 | #define SHIFT_IN_BITS_VALUE(x,n,v) ( x = (x << (n)) | ( (v) & ~(-1 << (n)) ) )
+        |                                                                 ~~ ^
+  /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/VbrTag.c:275:5: warning: shifting a negative signed value is undefined [-Wshift-negative-value]
+    275 |     SHIFT_IN_BITS_VALUE(buffer[2], 1u, cfg->extension);
+        |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/VbrTag.c:255:68: note: expanded from macro 'SHIFT_IN_BITS_VALUE'
+    255 | #define SHIFT_IN_BITS_VALUE(x,n,v) ( x = (x << (n)) | ( (v) & ~(-1 << (n)) ) )
+        |                                                                 ~~ ^
+  /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/VbrTag.c:277:5: warning: shifting a negative signed value is undefined [-Wshift-negative-value]
+    277 |     SHIFT_IN_BITS_VALUE(buffer[3], 2u, cfg->mode);
+        |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/VbrTag.c:255:68: note: expanded from macro 'SHIFT_IN_BITS_VALUE'
+    255 | #define SHIFT_IN_BITS_VALUE(x,n,v) ( x = (x << (n)) | ( (v) & ~(-1 << (n)) ) )
+        |                                                                 ~~ ^
+  /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/VbrTag.c:278:5: warning: shifting a negative signed value is undefined [-Wshift-negative-value]
+    278 |     SHIFT_IN_BITS_VALUE(buffer[3], 2u, eov->mode_ext);
+        |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/VbrTag.c:255:68: note: expanded from macro 'SHIFT_IN_BITS_VALUE'
+    255 | #define SHIFT_IN_BITS_VALUE(x,n,v) ( x = (x << (n)) | ( (v) & ~(-1 << (n)) ) )
+        |                                                                 ~~ ^
+  /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/VbrTag.c:279:5: warning: shifting a negative signed value is undefined [-Wshift-negative-value]
+    279 |     SHIFT_IN_BITS_VALUE(buffer[3], 1u, cfg->copyright);
+        |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/VbrTag.c:255:68: note: expanded from macro 'SHIFT_IN_BITS_VALUE'
+    255 | #define SHIFT_IN_BITS_VALUE(x,n,v) ( x = (x << (n)) | ( (v) & ~(-1 << (n)) ) )
+        |                                                                 ~~ ^
+  /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/VbrTag.c:280:5: warning: shifting a negative signed value is undefined [-Wshift-negative-value]
+    280 |     SHIFT_IN_BITS_VALUE(buffer[3], 1u, cfg->original);
+        |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/VbrTag.c:255:68: note: expanded from macro 'SHIFT_IN_BITS_VALUE'
+    255 | #define SHIFT_IN_BITS_VALUE(x,n,v) ( x = (x << (n)) | ( (v) & ~(-1 << (n)) ) )
+        |                                                                 ~~ ^
+  /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/VbrTag.c:281:5: warning: shifting a negative signed value is undefined [-Wshift-negative-value]
+    281 |     SHIFT_IN_BITS_VALUE(buffer[3], 2u, cfg->emphasis);
+        |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/VbrTag.c:255:68: note: expanded from macro 'SHIFT_IN_BITS_VALUE'
+    255 | #define SHIFT_IN_BITS_VALUE(x,n,v) ( x = (x << (n)) | ( (v) & ~(-1 << (n)) ) )
+        |                                                                 ~~ ^
+  /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/VbrTag.c:431:23: warning: comparison of array 'pTagData->toc' not equal to a null pointer is always true [-Wtautological-pointer-compare]
+    431 |         if (pTagData->toc != NULL) {
+        |             ~~~~~~~~~~^~~    ~~~~
+  /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/VbrTag.c:569:9: error: call to undeclared library function 'memset' with type 'void *(void *, int, unsigned long)'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
+    569 |         memset(buffer, 0, sizeof(buffer));
+        |         ^
+  /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/VbrTag.c:569:9: note: include the header <string.h> or explicitly provide a declaration for 'memset'
+  /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/VbrTag.c:805:5: error: call to undeclared library function 'strncpy' with type 'char *(char *, const char *, unsigned long)'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
+    805 |     strncpy((char *) &pbtStreamBuffer[nBytesWritten], szVersion, 9);
+        |     ^
+  /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/VbrTag.c:805:5: note: include the header <string.h> or explicitly provide a declaration for 'strncpy'
+  /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/VbrTag.c:882:10: error: call to undeclared library function 'strncmp' with type 'int (const char *, const char *, unsigned long)'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
+    882 |     if (!strncmp((char *) id3v2Header, "ID3", 3)) {
+        |          ^
+  /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/VbrTag.c:882:10: note: include the header <string.h> or explicitly provide a declaration for 'strncmp'
+  /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/VbrTag.c:993:5: error: call to undeclared library function 'memcpy' with type 'void *(void *, const void *, unsigned long)'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
+    993 |     memcpy(&buffer[nStreamIndex], btToc, sizeof(btToc));
+        |     ^
+  /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/VbrTag.c:993:5: note: include the header <string.h> or explicitly provide a declaration for 'memcpy'
+  16 warnings and 4 errors generated.
+  [8/14] Building C object CMakeFiles/soneme_lame.dir/_deps/lame_android-src/app/src/main/cpp/lamemp3/bitstream.c.o
+  FAILED: CMakeFiles/soneme_lame.dir/_deps/lame_android-src/app/src/main/cpp/lamemp3/bitstream.c.o 
+  /home/administrator/build/android-sdk/ndk/27.0.12077973/toolchains/llvm/prebuilt/linux-x86_64/bin/clang --target=aarch64-none-linux-android30 --sysroot=/home/administrator/build/android-sdk/ndk/27.0.12077973/toolchains/llvm/prebuilt/linux-x86_64/sysroot -Dsoneme_lame_EXPORTS -I/home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3 -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security  -fno-limit-debug-info  -fPIC -MD -MT CMakeFiles/soneme_lame.dir/_deps/lame_android-src/app/src/main/cpp/lamemp3/bitstream.c.o -MF CMakeFiles/soneme_lame.dir/_deps/lame_android-src/app/src/main/cpp/lamemp3/bitstream.c.o.d -o CMakeFiles/soneme_lame.dir/_deps/lame_android-src/app/src/main/cpp/lamemp3/bitstream.c.o -c /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/bitstream.c
+  /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/bitstream.c:141:5: error: call to undeclared library function 'memcpy' with type 'void *(void *, const void *, unsigned long)'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
+    141 |     memcpy(&bs->buf[bs->buf_byte_idx], esv->header[esv->w_ptr].buf, cfg->sideinfo_len);
+        |     ^
+  /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/bitstream.c:141:5: note: include the header <string.h> or explicitly provide a declaration for 'memcpy'
+  /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/bitstream.c:253:35: error: call to undeclared library function 'strlen' with type 'unsigned long (const char *)'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
+    253 |             for (i = 0; i < (int) strlen(version) && remainingBits >= 8; ++i) {
+        |                                   ^
+  /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/bitstream.c:253:35: note: include the header <string.h> or explicitly provide a declaration for 'strlen'
+  /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/bitstream.c:331:5: error: call to undeclared library function 'memset' with type 'void *(void *, int, unsigned long)'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
+    331 |     memset(esv->header[esv->h_ptr].buf, 0, cfg->sideinfo_len);
+        |     ^
+  /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/bitstream.c:331:5: note: include the header <string.h> or explicitly provide a declaration for 'memset'
+  3 errors generated.
+  [9/14] Building C object CMakeFiles/soneme_lame.dir/_deps/lame_android-src/app/src/main/cpp/lamemp3/quantize.c.o
+  FAILED: CMakeFiles/soneme_lame.dir/_deps/lame_android-src/app/src/main/cpp/lamemp3/quantize.c.o 
+  /home/administrator/build/android-sdk/ndk/27.0.12077973/toolchains/llvm/prebuilt/linux-x86_64/bin/clang --target=aarch64-none-linux-android30 --sysroot=/home/administrator/build/android-sdk/ndk/27.0.12077973/toolchains/llvm/prebuilt/linux-x86_64/sysroot -Dsoneme_lame_EXPORTS -I/home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3 -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security  -fno-limit-debug-info  -fPIC -MD -MT CMakeFiles/soneme_lame.dir/_deps/lame_android-src/app/src/main/cpp/lamemp3/quantize.c.o -MF CMakeFiles/soneme_lame.dir/_deps/lame_android-src/app/src/main/cpp/lamemp3/quantize.c.o.d -o CMakeFiles/soneme_lame.dir/_deps/lame_android-src/app/src/main/cpp/lamemp3/quantize.c.o -c /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/quantize.c
+  /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/quantize.c:124:5: error: call to undeclared library function 'memset' with type 'void *(void *, int, unsigned long)'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
+    124 |     memset(&(xrpow[upper]), 0, (576 - upper) * sizeof(xrpow[0]));
+        |     ^
+  /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/quantize.c:124:5: note: include the header <string.h> or explicitly provide a declaration for 'memset'
+  /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/quantize.c:307:9: error: call to undeclared library function 'memcpy' with type 'void *(void *, const void *, unsigned long)'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
+    307 |         memcpy(ixwork, cod_info->xr, 576 * sizeof(FLOAT));
+        |         ^
+  /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/quantize.c:307:9: note: include the header <string.h> or explicitly provide a declaration for 'memcpy'
+  /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/quantize.c:486:9: error: call to undeclared function 'qsort'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
+    486 |         qsort(&work[j - width], width, sizeof(FLOAT), floatcompare);
+        |         ^
+  /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/quantize.c:1749:9: error: call to undeclared library function 'exit' with type 'void (int) __attribute__((noreturn))'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
+   1749 |         exit(-1);
+        |         ^
+  /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/quantize.c:1749:9: note: include the header <stdlib.h> or explicitly provide a declaration for 'exit'
+  4 errors generated.
+  [10/14] Building C object CMakeFiles/soneme_lame.dir/_deps/lame_android-src/app/src/main/cpp/lamemp3/psymodel.c.o
+  FAILED: CMakeFiles/soneme_lame.dir/_deps/lame_android-src/app/src/main/cpp/lamemp3/psymodel.c.o 
+  /home/administrator/build/android-sdk/ndk/27.0.12077973/toolchains/llvm/prebuilt/linux-x86_64/bin/clang --target=aarch64-none-linux-android30 --sysroot=/home/administrator/build/android-sdk/ndk/27.0.12077973/toolchains/llvm/prebuilt/linux-x86_64/sysroot -Dsoneme_lame_EXPORTS -I/home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3 -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security  -fno-limit-debug-info  -fPIC -MD -MT CMakeFiles/soneme_lame.dir/_deps/lame_android-src/app/src/main/cpp/lamemp3/psymodel.c.o -MF CMakeFiles/soneme_lame.dir/_deps/lame_android-src/app/src/main/cpp/lamemp3/psymodel.c.o.d -o CMakeFiles/soneme_lame.dir/_deps/lame_android-src/app/src/main/cpp/lamemp3/psymodel.c.o -c /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/psymodel.c
+  /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/psymodel.c:775:5: error: call to undeclared library function 'memset' with type 'void *(void *, int, unsigned long)'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
+    775 |     memset(&ns_hpfsmpl[0][0], 0, sizeof(ns_hpfsmpl));
+        |     ^
+  /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/psymodel.c:775:5: note: include the header <string.h> or explicitly provide a declaration for 'memset'
+  /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/psymodel.c:1442:5: error: call to undeclared library function 'memcpy' with type 'void *(void *, const void *, unsigned long)'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
+   1442 |     memcpy(&last_thm[0], &psv->thm[0], sizeof(last_thm));
+        |     ^
+  /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/psymodel.c:1442:5: note: include the header <string.h> or explicitly provide a declaration for 'memcpy'
+  2 errors generated.
+  [11/14] Building C object CMakeFiles/soneme_lame.dir/_deps/lame_android-src/app/src/main/cpp/lamemp3/encoder.c.o
+  FAILED: CMakeFiles/soneme_lame.dir/_deps/lame_android-src/app/src/main/cpp/lamemp3/encoder.c.o 
+  /home/administrator/build/android-sdk/ndk/27.0.12077973/toolchains/llvm/prebuilt/linux-x86_64/bin/clang --target=aarch64-none-linux-android30 --sysroot=/home/administrator/build/android-sdk/ndk/27.0.12077973/toolchains/llvm/prebuilt/linux-x86_64/sysroot -Dsoneme_lame_EXPORTS -I/home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3 -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security  -fno-limit-debug-info  -fPIC -MD -MT CMakeFiles/soneme_lame.dir/_deps/lame_android-src/app/src/main/cpp/lamemp3/encoder.c.o -MF CMakeFiles/soneme_lame.dir/_deps/lame_android-src/app/src/main/cpp/lamemp3/encoder.c.o.d -o CMakeFiles/soneme_lame.dir/_deps/lame_android-src/app/src/main/cpp/lamemp3/encoder.c.o -c /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/encoder.c
+  /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/encoder.c:202:9: error: call to undeclared library function 'memset' with type 'void *(void *, int, unsigned long)'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
+    202 |         memset(primebuff0, 0, sizeof(primebuff0));
+        |         ^
+  /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/encoder.c:202:9: note: include the header <string.h> or explicitly provide a declaration for 'memset'
+  /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/encoder.c:471:17: error: call to undeclared library function 'memcpy' with type 'void *(void *, const void *, unsigned long)'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
+    471 |                 memcpy(gfc->pinfo->xr[gr][ch], &gfc->l3_side.tt[gr][ch].xr[0], sizeof(FLOAT) * 576);
+        |                 ^
+  /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/encoder.c:471:17: note: include the header <string.h> or explicitly provide a declaration for 'memcpy'
+  2 errors generated.
+  [12/14] Building C object CMakeFiles/soneme_lame.dir/_deps/lame_android-src/app/src/main/cpp/lamemp3/quantize_pvt.c.o
+  FAILED: CMakeFiles/soneme_lame.dir/_deps/lame_android-src/app/src/main/cpp/lamemp3/quantize_pvt.c.o 
+  /home/administrator/build/android-sdk/ndk/27.0.12077973/toolchains/llvm/prebuilt/linux-x86_64/bin/clang --target=aarch64-none-linux-android30 --sysroot=/home/administrator/build/android-sdk/ndk/27.0.12077973/toolchains/llvm/prebuilt/linux-x86_64/sysroot -Dsoneme_lame_EXPORTS -I/home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3 -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security  -fno-limit-debug-info  -fPIC -MD -MT CMakeFiles/soneme_lame.dir/_deps/lame_android-src/app/src/main/cpp/lamemp3/quantize_pvt.c.o -MF CMakeFiles/soneme_lame.dir/_deps/lame_android-src/app/src/main/cpp/lamemp3/quantize_pvt.c.o.d -o CMakeFiles/soneme_lame.dir/_deps/lame_android-src/app/src/main/cpp/lamemp3/quantize_pvt.c.o -c /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/quantize_pvt.c
+  /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/quantize_pvt.c:1057:13: error: call to undeclared library function 'memcpy' with type 'void *(void *, const void *, unsigned long)'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
+   1057 |             memcpy(scalefac_sav, cod_info->scalefac, sizeof(scalefac_sav));
+        |             ^
+  /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/quantize_pvt.c:1057:13: note: include the header <string.h> or explicitly provide a declaration for 'memcpy'
+  1 error generated.
+  [13/14] Building C object CMakeFiles/soneme_lame.dir/_deps/lame_android-src/app/src/main/cpp/lamemp3/vbrquantize.c.o
+  FAILED: CMakeFiles/soneme_lame.dir/_deps/lame_android-src/app/src/main/cpp/lamemp3/vbrquantize.c.o 
+  /home/administrator/build/android-sdk/ndk/27.0.12077973/toolchains/llvm/prebuilt/linux-x86_64/bin/clang --target=aarch64-none-linux-android30 --sysroot=/home/administrator/build/android-sdk/ndk/27.0.12077973/toolchains/llvm/prebuilt/linux-x86_64/sysroot -Dsoneme_lame_EXPORTS -I/home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3 -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security  -fno-limit-debug-info  -fPIC -MD -MT CMakeFiles/soneme_lame.dir/_deps/lame_android-src/app/src/main/cpp/lamemp3/vbrquantize.c.o -MF CMakeFiles/soneme_lame.dir/_deps/lame_android-src/app/src/main/cpp/lamemp3/vbrquantize.c.o.d -o CMakeFiles/soneme_lame.dir/_deps/lame_android-src/app/src/main/cpp/lamemp3/vbrquantize.c.o -c /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/vbrquantize.c
+  /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/vbrquantize.c:352:5: error: call to undeclared library function 'memset' with type 'void *(void *, int, unsigned long)'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
+    352 |     memset(did_it, 0, sizeof(did_it));
+        |     ^
+  /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/vbrquantize.c:352:5: note: include the header <string.h> or explicitly provide a declaration for 'memset'
+  /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/vbrquantize.c:994:5: error: call to undeclared library function 'exit' with type 'void (int) __attribute__((noreturn))'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
+    994 |     exit(-1);
+        |     ^
+  /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a/_deps/lame_android-src/app/src/main/cpp/lamemp3/vbrquantize.c:994:5: note: include the header <stdlib.h> or explicitly provide a declaration for 'exit'
+  2 errors generated.
+  ninja: build stopped: subcommand failed.
+  
+  C++ build system [build] failed while executing:
+      /home/administrator/build/android-sdk/cmake/3.22.1/bin/ninja \
+        -C \
+        /home/administrator/code/soneme-recorder/app/.cxx/Debug/d39394n6/arm64-v8a \
+        soneme_lame
+    from /home/administrator/code/soneme-recorder/app
+
+* Try:
+> Run with --stacktrace option to get the stack trace.
+> Run with --info or --debug option to get more log output.
+> Run with --scan to get full insights from a Build Scan (powered by Develocity).
+> Get more help at https://help.gradle.org.
+
+Deprecated Gradle features were used in this build, making it incompatible with Gradle 10.
+
+You can use '--warning-mode all' to show the individual deprecation warnings and determine if they come from your own scripts or plugins.
+
+For more on this, please refer to https://docs.gradle.org/9.7.0/userguide/command_line_interface.html#sec:command_line_warnings in the Gradle documentation.
+
+BUILD FAILED in 6s
+24 actionable tasks: 3 executed, 21 up-to-date

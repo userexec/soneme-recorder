@@ -1,324 +1,361 @@
 # Soneme Recorder
 
-Soneme recorder is a structured voice memo app. It is organized into Series, which represent a recurring thing you want to record and contain the metadata and naming associated with it, and Recordings, which are the invididual recordings associated with a Series. Voice recording is specialized for use when one person speaking is in the same room and the others are coming through a radio speaker. The major challenge for this recording scenario is getting equivalent voice levels between the different speakers. Primarily a problem of microphone placement and keeping the radio volume adjusted appropriately.
+![Soneme Recorder Icon](https://github.com/userexec/soneme-recorder/blob/master/soneme_recorder_icon.svg?raw=true)
 
-- Uses Android's AudioRecord API AutomaticGainControl feature if available, but records without it if not
-- Displays a rolling RMS level
-- RMS display has a target line drawn at -12 dBFS and a peak line drawn at -6 dBFS
-- Offers a calibration feature--instead of jumping straight into a recording, you can calibrate the microphone placement first by speaking normally and seeing how you're coming through on the meter, then the problem is isolated to just using the volume control on the radio to keep everone else's voices on target.
-- Creates a SonemeRecorder folder on the storage medium of your choice, then creates a subfolder for each Series you define. Makes for easy syncing of specific sets of recordings with Soneme Sync.
-- Recording playback is handled by the audio player from Soneme Audiobooks. Very little difference in use case here, so the existing player is perfect for it.
+Soneme Recorder is a small, keypad-friendly Android voice recorder built around structured, repeatable recordings rather than a giant undifferentiated pile of voice memos.
 
-## Target device properties
+Recordings are organized into **Series**. A Series is a recurring thing you record—such as a radio net, meeting, interview series, class, or other regular event. Each Series is an ordinary folder on the phone, and each finished recording is an ordinary MP3 inside it.
 
-Soneme Recorder targets the Sonim XP3900 only. It has the following constraints:
+Recorder was designed particularly for situations where **one speaker is physically in the room and the other speakers are coming through a radio or other loudspeaker**. In that situation, getting reasonably consistent voice levels is mostly a matter of microphone placement and adjusting the speaker volume. Recorder provides a live RMS history, target guides, a large quick level indicator (think of it as an at-a-glance "Magic Eye" display), and a disposable calibration mode to make that much easier.
 
-- 240x320
-- Android 11 Go
-- No touchscreen
-- Options menu softkeys
-- No Google Play Store or services
-- App must be sideloaded as an .apk
+It is designed specifically for the **Sonim XP3plus XP3900**. There are no touch controls for the main interface. A normal Android phone is not a target and probably will not have the Sonim softkeys Recorder expects.
 
-## Application overview
+![Series view](https://github.com/userexec/soneme-recorder/blob/master/screenshot-series.png?raw=true)  ![Recordings view](https://github.com/userexec/soneme-recorder/blob/master/screenshot-recordings.png?raw=true)  ![Recording example](https://github.com/userexec/soneme-recorder/blob/master/screenshot-recording-1.png?raw=true)  ![Recording example](https://github.com/userexec/soneme-recorder/blob/master/screenshot-recording-2.png?raw=true)  ![Recording example](https://github.com/userexec/soneme-recorder/blob/master/screenshot-recording-3.png?raw=true)  ![Player view](https://github.com/userexec/soneme-recorder/blob/master/screenshot-player.png?raw=true)
 
-On first setup, application asks the user to select a storage folder. Resolve the actual Recorder root as follows:
-- If the selected folder itself is named "SonemeRecorder" (case-insensitive), use it.
-- Otherwise, if the selected folder already contains a child folder named "SonemeRecorder" (case-insensitive), use that existing child.
-- Otherwise, create a new "SonemeRecorder" child folder inside the selected folder and use it.
-Persist access to the selected storage tree and remember the resolved SonemeRecorder folder within it. Do not create a second SonemeRecorder folder merely because an existing one uses different capitalization, and do not rename an existing case variant just to normalize capitalization.
+## Features
 
-On startup, first remove orphaned save-staging files in immediate Series folders, but only when the filename exactly matches Recorder's staging grammar: "SAVING _ [UUID].mp3", where UUID is a standard UUID string. Files that merely start with "SAVING" are not touched.
+* Structured recordings organized into Series
+* Live 48 kHz mono MP3 recording at 96 kbps CBR
+* Rolling RMS level history
+* Large five-second quick level indicator for at-a-glance monitoring
+* Target Level and Target Peak guides
+* Calibration mode that meters audio without creating a recording
+* Pause and Resume while continuing to monitor live levels
+* Current clock time and recorded duration visible while recording
+* Background recording with the screen off or flip closed
+* Crash/interruption recovery for recordings that were not finished normally
+* Ordinary folders and MP3 files rather than a proprietary recording library
+* ID3 metadata written into finished recordings
+* Built-in playback based on the Soneme Audiobooks player
+* Playback speed, repeat modes, sleep timer, and adjustable seek intervals
+* Hardware keypad playback shortcuts
+* Headset and Bluetooth media controls
+* Sonim softkey integration
+* No accounts, analytics, advertising, subscriptions, cloud services, or runtime network access
 
-On startup, scan the immediate Series folders for interrupted recordings, but only recognize files whose names fully match Recorder's temporary grammar: "TEMP _ [series] _ [timestamp].mp3" with a valid filename timestamp. The containing Series folder is authoritative for the Series name; the series text embedded in the TEMP filename is informational only. Files that merely start with "TEMP" or otherwise fail the temporary filename grammar are ignored.
+## Tested Device
 
-For each recognized TEMP file, scan the MP3 stream through the last complete valid frame and ignore any incomplete trailing frame left by an interrupted encoder. If there are no complete valid MP3 frames, offer Discard only. Otherwise display a message "Interrupted recording from [date/time] found in [series]. Please enter a title." and a title box with the same limitations and validation as the Recorder view's title box. Options menu buttons Discard (blank) Save. Discard deletes the TEMP file and moves on. Save performs the normal crash-safe finishing process described below, copying only complete valid MP3 frames.
+Soneme Recorder has been developed and tested on:
 
-If the SonemeRecorder folder is not available (e.g. SD card removed), offer to either re-run first-time setup or exit the application.
+* Sonim XP3plus XP3900 — Android 11 Go
 
-App then lands on Series view and waits for interaction.
+The interface is designed for the XP3900's 240x320 non-touch display, D-pad, numeric keypad, and native three-position Sonim softkey bar.
 
-Items in Series view treat the filesystem as the source of truth. The items in series view are the folders in the SonemeRecorder folder.
+## Installing
 
-One series exists by default called Miscellaneous. It is not editable, and is always the last item in Series view. It cannot be moved up. Its subfolder is normally "Miscellaneous".
+Soneme Recorder is distributed as a normal Android APK.
 
-Any case variant of "Miscellaneous" is recognized as this same reserved Series and pinned last. If a case variant already exists, use it without renaming it and do not create a second Miscellaneous folder. If no case-insensitive match exists, Soneme Recorder creates "Miscellaneous" on startup.
+Copy the APK to the device and install it, or install from a connected computer with ADB:
 
-Recording uses a JNI wrapper around LAME. Live encoding, mono 48 kHz, 96 kbps CBR. Disable LAME Xing/Info tag generation; Recorder creates its own metadata separately and the temporary output is a frame stream only.
+```sh
+adb install soneme-recorder.apk
+```
 
-Audio pipeline is:
-AudioRecord
-  AudioSource.MIC
-  PCM 16-bit
-  mono
-  48,000 Hz
-       │
-       ├── Android AGC, attached to this AudioRecord session if available
-       │
-       ├── RMS calculation / display
-       │
-       └── LAME → 96 kbps mono CBR MP3
+If updating an existing release signed with the same release key:
 
-If AGC is unavailable or cannot be created/enabled for the active AudioRecord session, continue silently without it. No warning, setting, or status indicator is needed.
+```sh
+adb install -r soneme-recorder.apk
+```
 
-Metadata uses an ID3v2.4 header which is created separately. LAME is used only for MP3 encoding and the header is created separately.
-Recordings are live-encoded into a temporary MP3 inside the selected series folder with a filename intentionally outside the normal filename grammar: "TEMP _ [series] _ [timestamp].mp3". The containing folder is authoritative for Series identity; the series component in the TEMP filename is informational.
+Android may require permission to install apps from unknown sources when installing directly on the phone.
 
-Saving is transactional. Write the finished ID3v2.4 header and complete MP3 frames copied from TEMP to a staging file named "SAVING _ [UUID].mp3" in the Series folder. Generate the UUID with `java.util.UUID.randomUUID()`; it is ephemeral transaction state only and is never part of a recording's persistent identity or database. Completely write and close the staging file, replace any existing same-named finished recording, rename the staging file to the normal finished filename, and only then delete the original TEMP file. If any save/commit step fails, do not delete TEMP so the recording remains recoverable.
+## First Setup
 
-Recordings are saved as mp3 files with the following metadata:
- - title - individual recording title followed by " - " and pretty date (e.g. "Test - August 14, 2026")
- - artist - Series title
- - album - Soneme Recorder
- - year (TDRC) - Recording start timestamp in format 2026-08-14T18:58:23
+Recorder stores its audio in a normal folder named:
 
-Timestamps are used throughout the application and vary in format, with conversion necessary frequently. Formats in different contexts are as follows:
-UI: Friday, August 14, 2026 06:58 PM
-filename timestamp: August 14, 2026, 18.58.23
-ID3 TDRC: 2026-08-14T18:58:23
-ID3 TIT2: [recording title] - August 14, 2026
+```text
+SonemeRecorder
+```
 
-Filename timestamp is considered authoritative. Date format should always be generated and parsed using an explicit English/US locale, regardless of the phone's locale.
+On first launch, Recorder explains that no recording folder is configured and asks where it should live. Choose **Set up** to open Android's system folder picker.
 
-## Views
+If you already have a `SonemeRecorder` folder, you can select either that folder itself or the folder containing it. If you are starting fresh, select the storage location where you want Recorder to create it. Internal storage and removable SD-card storage both work.
 
-### Series
+Recorder remembers access to that location afterward. If the configured storage later becomes unavailable—for example, because the SD card has been removed—Recorder will ask you to choose a recording folder again or exit.
 
-#### Controls
+Recorder automatically creates a reserved **Miscellaneous** Series if one does not already exist.
 
- - D-pad up/down cycles through items
- - Back button returns to launcher
- - D-pad center button selects an item and goes to Recordings view
+### XP3900 folder-picker quirk
 
-#### Main content
+On a freshly installed copy, Android's system folder picker may initially display a blank Sonim softkey bar. Pressing the D-pad once causes the normal **Cancel** and **Select** labels to appear. The picker itself is still functional before the labels appear.
 
-Header bar reads "Series"
+This behavior occurs in the XP3900's system DocumentsUI rather than Recorder and does not affect Recorder's own softkeys after setup.
 
-Lists the Series available to record into as items in a list. These are the subfolders of the SonemeRecorder folder. These are always displayed in alphabetical order with the exception of Miscellaneous (recognized case-insensitively), which is always pinned last.
+## How Recorder Is Organized
 
-A valid finished recording must both have a filename that parses according to Recorder's finished filename grammar and be recognized by Android as playable audio with a usable duration. Malformed, corrupt, or unrelated files are left untouched but do not appear or count anywhere in Recorder. TEMP and SAVING files never count as finished recordings.
+Recorder deliberately treats the filesystem as its recording library.
 
-Each list item has the Series name (marquee if too long). Below the name, the number of valid recordings within that series' folder, and the date of the most recent valid recording in format "August 15, 2026". Information is assembled directly from the filesystem and by examining dates in the filenames; the filename timestamp is authoritative.
+A typical recording folder looks like:
 
-#### Options menu
+```text
+SonemeRecorder/
+├── Amateur Radio Net/
+│   ├── Amateur Radio Net - August 16, 2026, 08.00.00 - Weekly Net.mp3
+│   └── Amateur Radio Net - August 9, 2026, 08.00.00 - Weekly Net.mp3
+├── Meetings/
+│   └── Meetings - August 14, 2026, 13.30.00 - Planning Meeting.mp3
+└── Miscellaneous/
+```
 
- - Delete
+There is no hidden database containing the recordings themselves. Series are folders, and recordings are MP3 files.
 
-   Not available for "Miscellaneous" (case-insensitive). Opens confirmation with message "Deleting a series will also delete all files in its folder. Be sure anything you want to keep is transferred off the device before deleting." Options "Cancel" (default) and "Delete". Confirming recursively deletes the entire Series folder and everything in it, including files Recorder does not recognize. After deletion, focus the item that moved into the deleted item's position; if the deleted item was last, focus the new last item.
+This also makes Series easy to copy or synchronize individually with something like Soneme Sync.
 
- - Edit
+## Series
 
-   Not available for "Miscellaneous" (case-insensitive). Opens Series Edit view for this series.
+The first screen lists all Series alphabetically, with **Miscellaneous** always pinned last.
 
- - New
+Each Series shows:
 
-   Opens Series Edit view to create a new series.
+* its name,
+* the number of recognized recordings in the folder,
+* and the date of its newest recording.
 
+Press the D-pad center button to open a Series and view its recordings.
 
-### Series Edit
+Use **New** to create a Series. The Series name becomes its folder name and is also written as the Artist field on new recordings.
 
-#### Controls
+Use **Edit** to rename an existing Series. Renaming a Series renames the folder only. Recorder deliberately does **not** go back and rewrite the filenames or metadata of old recordings. Historical files remain historical files.
 
- - While the Series title field owns text focus, Back performs the field's normal backspace behavior.
- - Otherwise, Back is equivalent to Cancel and discards unsaved edits.
+### Deleting a Series
 
-#### Main Content
+Deleting a Series deletes the **entire Series folder and everything inside it**, including files Recorder does not recognize.
 
-Series title field, to be saved to the "artist" metadata field on new recordings. Series title must be nonblank and valid as a filesystem component. Reject control characters, `/`, `\`, `:`, `*`, `?`, `"`, `<`, `>`, `|`, the sequence " - ", leading or trailing whitespace, a trailing period, and the exact names `.` or `..`. The UTF-8 encoded folder name must not exceed 255 bytes.
-Series names are unique case-insensitively. Reject a new or renamed Series if its name collides case-insensitively with another Series. Any case variant of "Miscellaneous" is reserved and cannot be created or renamed through Series Edit.
-Just the one field--very short main content.
+If something in that folder matters, move or copy it somewhere else before confirming the deletion.
 
-Helpful notes on series titles:
+The reserved Miscellaneous Series cannot be renamed or deleted.
 
-Title is used as a folder name.
-If series already exists and is saved, rename the previous folder to the new name. If the provider/filesystem refuses the rename, leave the old folder untouched, stay in Series Edit, and show "Could not rename series." Do not fall back to copying into a new folder.
-If new series, create a new folder for this series. If creation fails, stay in Series Edit and show "Could not create series."
+## Recordings
 
-Recordings will go into this folder. It's important that it be an actual folder on the storage medium of choice since the files will presumably be transferred to a NAS with Soneme Sync.
+Opening a Series shows its recordings newest first.
 
-Changes only apply to the filenames and metadata of new recordings. The app does not go through previous recordings and edit existing info, so it is possible that this app shows series titles and recording titles that do not reflect the filenames and metadata of the files within a given series. This is expected. To play nicely with syncing, history is not revised.
+Each row displays the recording title, recording date/time, and duration. Selecting a recording opens the Player.
 
-#### Options Menu
+Choose **New** to open the Recorder for that Series.
 
- - Delete
+Recorder recognizes finished recordings by its filename format and by verifying that Android can open them as audio. Files that do not match the expected format are simply ignored; Recorder does not delete them.
 
-   Opens confirmation with message "Deleting a series will also delete all files in its folder. Be sure anything you want to keep is transferred off the device before deleting." Options "Cancel" (default) and "Delete". Confirming recursively deletes the entire Series folder and everything in it. After deletion, return to Series and focus the item that moved into the deleted item's position; if the deleted item was last, focus the new last item.
+The normal filename format is:
 
- - Cancel
+```text
+[Series] - [date and time] - [title].mp3
+```
 
-   Returns to Series view with this Series focused and discards unsaved edits.
+For example:
 
- - Save
+```text
+Amateur Radio Net - August 16, 2026, 08.00.00 - Weekly Net.mp3
+```
 
-   Only appears if user has made a change and all required fields are valid.
+Because filenames are part of Recorder's library structure, manually renaming finished recordings to something completely different may make them disappear from the app's lists even though the files remain on storage.
 
+## Calibrating Levels
 
-### Recordings
+Before making a real recording, choose **Calibrate**.
 
-#### Controls
+Calibration runs the same microphone, optional Android automatic gain control, and level-metering path used during a recording, but it does **not** create an MP3 file. Choose **Done** when finished.
 
- - D-pad up/down cycles through items
- - Back button switches to Series view with this series focused
- - D-pad center button opens Player view for focused item
+The intended workflow for recording a person in the room together with voices from a radio or speaker is:
 
-#### Main content
+1. Put the phone where it will remain during the recording.
+2. Start Calibrate.
+3. Speak normally and use the level display to settle on a sensible microphone position.
+4. Once your own voice is landing around the target level, leave the phone alone.
+5. Adjust the radio or speaker volume until remote voices land in roughly the same area.
+6. Choose Done, then start the real recording.
 
-Header bar reads the Series title
+Android's `AutomaticGainControl` is used when the XP3900 makes it available and allows it to be enabled. If it is unavailable, Recorder simply continues without it.
 
-Each list item has the track title (marqee if too long) with the date and time of the recording as subtext in format "Friday, August 15, 2026 10:14 PM", then total track time to the right.
+Calibration is disposable. If Recorder loses the foreground while calibrating, calibration ends rather than continuing in the background.
 
-Title and date/time are taken directly from the filenames. Track title is always what's after the last " - " and before the file extension. Date/time is always taken from what's between the two instances of " - ". A file is shown only if its filename parses according to Recorder's finished filename grammar and Android recognizes it as playable audio with a usable duration. Files that fail either test are omitted from the list and left untouched. Follow format or don't show up.
+## Understanding the Level Display
 
-Items are always in date order, newest first, and are not reorderable. If there are no valid recordings, show an empty state with New still available.
+The large black graph shows roughly the last ten seconds of RMS audio level. New audio enters from the right and rolls toward the left. The blue area under the trace makes the recent level history easy to read at a glance.
 
-#### Options menu
+Two dotted reference lines are drawn over the graph:
 
- - Delete
-   
-   Opens confirmation with message "Delete [name]?" Options "Cancel" (default) and "Delete". After deletion, focus the item that moved into the deleted item's position; if the deleted item was last, focus the new last item. If no recordings remain, show the empty state.
- 
- - Play
+* **Target Level: -20 dBFS** — a useful neighborhood for normal voice level.
+* **Target Peak: -8 dBFS** — a warning reference for louder peaks and reduced headroom.
 
-   Opens Player view for focused item
+These are guides, not hard limits. Speech is variable. The goal is a healthy average level with enough room above it for louder syllables and unexpected peaks.
 
- - New
+Beneath the graph is the large quick level indicator. It summarizes roughly the last five seconds:
 
-   Opens the Recorder view
+* **Blue** means the recent average is quiet.
+* **Green** centers around the -20 dBFS target.
+* **Yellow/orange** is the transition toward an increasingly hot signal.
+* **Red** indicates the recent level has reached the upper warning range, becoming fully red at about -8 dBFS and above.
 
-### Recorder
+The indicator's opacity is independent of its color. A mostly transparent bar means relatively little of the last five seconds contained meaningful audio; a solid bar means sound was present consistently. Quiet windows remain part of the level average deliberately, so the color fades rather than jumping instantly whenever someone stops speaking.
 
-#### Controls
+## Making a Recording
 
-- If recording or calibration is not in progress, back returns to Recordings view without saving. Once calibration or recording has begun (including recording pause state), back is disabled. Calibration must be ended or recording must be finished to go back.
+Choose **Record** to begin.
 
-#### Main Content
+The first time you use Calibrate or Record, Android will ask for microphone permission. Recorder cannot record without it.
 
-On first Calibrate or Record, request RECORD_AUDIO. A real recording belongs to the foreground microphone service. Use a minimal notification of "Recording: [series]". If AGC is unavailable or fails to enable for the active AudioRecord session, continue silently without it.
+While recording, the bottom status bar shows:
 
-Series title displayed along top in white bar, marquee if too long.
-Date displayed as subtext to series title, time started added when record is pressed. Format "Friday, August 14, 2026 06:58 PM". To be saved in the recording's TDRC metadata in format 2026-08-14T18:58:23.
-To right, elapsed recording time. Does not increment when in Calibrate or Pause, counts up when recording.
+* **Current time** — the phone's local clock, including seconds.
+* **Recorded** — the actual amount of audio recorded so far.
 
-Recording widget and quick indicator widget work on RMS measurement windows of RMS over 2048 PCM samples converted to dBFS. Maximum dBFS is 0, minimum is -60. Any values that fall outside this range are clamped to the maximum or minimum bounds respectively.
+Recorded time does not advance while paused.
 
-Recording widget is black background, full width, taking up most of the screen. Rolling display of RMS level representing approximately 10 seconds of audio, with current audio level on right hand side of screen, previous measurement windows rolling to left. Bottom of widget is silence/-60 dBFS, top of widget is 0 dBFS. Level data is #4F6F8F. During the first 10 seconds, use only measurement windows that actually exist and progressively fill the graph; do not pad the unwritten history with silence.
+### Pause and Resume
 
-Two labeled horizontal dotted lines in white run across the widget: Target Level and Target Peak. Target Level is positioned at -12 dBFS. Target Peak is positioned at -6 dBFS. They are on top of the widget and are purely decorative/for reference.
+Choose **Pause** to stop adding audio to the MP3 without stopping the session. The level display continues to monitor the microphone, and Recorder shows **Not recording** over the meter.
 
-Level quick indicator is a two-layered bar at the bottom of the screen that averages the sample levels seen over the past 5 seconds. The background layer of the bar is light gray, and the foreground layer is a variable color and opacity. During the first 5 seconds, calculate both values only from measurement windows that actually exist; do not pad the dataset with silence.
-The level indicator adjusts two values, opacity and color, using two independent formulas.
-Opacity is controlled by the proportion of measurement windows that were over -40 dBFS, simple true false. If all measurement windows were over, 100% opacity, if none were over, 0% opacity, and if 50% were over, 50% opacity.
-Color is determined by the average of all measurement windows in the 5-second dataset, with every window at or below -40 dBFS clamped to -40 dBFS before averaging. These quiet windows intentionally remain in the average so the displayed color fades toward the low-level end rather than jumping rapidly between active-sound values. Bar color is in RGB with intermediary values for each channel between 0 and 255 occurring only in certain ranges of average dBFS.
-Red:
-<= -12 dBFS - 0
-\>= -6 dBFS - 255
-Green:
-<= -18 dBFS - 0
-== -12 dBFS - 255
-\>= -6 dBFS - 0
-Blue:
-<= -18 dBFS - 255
-\>= -12 dBFS - 0
+Choose **Resume** to continue writing audio to the same recording.
 
-Time start is the time the actual recording starts, not the time Recorder view is opened or when Calibrate is used.
+### Closing the phone
 
-For screen closed or recorder losing foreground: Make an active real recording a foreground microphone service, so closing the flip or turning off the display doesn't terminate the recording. Not necessary for Calibrate, only for Record. The foregrounding is retained through Pause/Resume. If a real recording service exists, launching/resuming Soneme Recorder always returns directly to its live Recorder screen, not Series. Service owns start time, elapsed duration, pause state, encoder state, and recent RMS windows--the Activity merely reconnects and redraws them. If Calibrate loses the foreground, calibration should simply stop/discard.
+A real recording runs as an Android foreground microphone service. Closing the flip, turning off the display, or temporarily leaving the Activity does **not** stop the recording.
 
-On recording failure in microphone capture, LAME, storage writing, or other part of recording pipeline, stop immediately rather than silently continue. Preserve whatever TEMP data was successfully written, end the foreground service, and report that the recording was interrupted. If there are complete valid MP3 frames, it can go through the same recovery/title process; if there are zero complete frames, delete/discard the unusable TEMP instead of offering recovery.
+Recorder shows an Android foreground notification while a recording is active. Reopening Recorder reconnects to the same live recording, including its elapsed time, pause state, and recent meter history.
 
-#### Options Menu
+### Finishing and saving
 
- - Cancel
-  
-   Changes to (blank) when calibration or recording is in progress. If calibration or recording is not in progress, pressing Cancel returns to Recordings view without saving.
+Choose **Finish** when the recording is over.
 
- - Calibrate/Done, Pause/Resume
+Recorder asks for a title. Leaving the title blank saves it as **Untitled**.
 
-   If recording has not yet started, middle options menu control is Calibrate/Done.
-   Pressing Calibrate starts the same AudioRecord + AGC + RMS capture path used for a real recording, but discards the PCM after metering. Calibration does not start LAME and does not create a TEMP file. Pressing Done clears the widget, discards calibration state, and switches button back to Calibrate.
-   If recording has started, middle options menu control is Pause/Resume.
-   Pressing Pause temporarily discards the PCM instead of feeding it to the MP3 encoder until Resume is pressed. Recording widget continues to display audio data, but new audio is not recorded. Change middle options menu button to Resume and show a "Not recording" box over the recording widget. Pressing Resume resumes normal recording, changes middle options menu button back to Pause, and removes the "Not recording" box.
+Choose **Save** to finish the MP3 and return to the Recordings list, or **Discard** to throw the recording away.
 
- - Record/Finish
+The recording start time is the moment **Record** was pressed—not when the Recorder screen was opened and not when calibration began.
 
-   Starts and ends recording. 
-   
-   On Record:
-   - If currently calibrating (Calibrate has been clicked and Done is shown for middle options menu button), end calibration as if Done was pressed.
-   - Switch middle options menu button to Pause/Resume
+## Recording Format and Metadata
 
-   On Finish:
-   - end recording and flush/finalize the LAME stream.
-   - If the TEMP contains zero complete valid MP3 frames, delete the unusable TEMP, show "No audio was recorded.", and return to the idle Recorder screen without opening the title dialog.
-   - Otherwise pop up a box with a Title field. Recording title may be blank; blank becomes "Untitled" on Save. For nonblank titles, reject control characters, `/`, `\`, `:`, `*`, `?`, `"`, `<`, `>`, `|`, the sequence " - ", leading or trailing whitespace, a trailing period, and the exact names `.` or `..`.
-   - The complete generated filename "[series] - [pretty date/time] - [title].mp3" (using "Untitled" when the title field is blank) must not exceed 255 bytes when UTF-8 encoded. If it would, blank the Save option and show "Title is too long." For other invalid title content, blank Save until corrected and show the existing helpful validation message.
-   - Back button should not be disabled when cursor is in the title field, as Back is used as backspace. If cursor is not in the title field, Back remains disabled; the only exits are Discard or Save.
-   - change options menu to Discard (blank) Save
-   
-   on Discard pressed, discard recording and return to Recordings view.
-   on Save pressed, if Title has no value use "Untitled" as value, then:
-   
-   - show saving... popup
-   - Create recording's metadata title field as "[title] - [pretty date]"
-   - final filename is "[series] - [pretty date/time] - [title].mp3". If a finished file of the same name already exists, replace it.
-   - perform the transactional SAVING-file process described in Application overview: write ID3v2.4 + the complete TEMP MP3 frames to "SAVING _ [UUID].mp3", fully close it, replace any existing final file, rename staging to the final filename, then delete TEMP. If the operation fails before completion, keep TEMP and report the save failure so the recording remains recoverable.
-   
-   on file save complete
-   
-   - return to and refresh Recordings view with first item focused
+Finished recordings are ordinary MP3 files:
 
+* 48,000 Hz
+* mono
+* 96 kbps CBR
+* ID3v2.4 metadata
 
-### Player
+Recorder writes metadata including:
 
-#### Controls
+* **Title:** recording title plus recording date
+* **Artist:** Series name
+* **Album:** Soneme Recorder
+* **Recording time:** the recording start timestamp
 
- - Back button goes to Recordings view, stops playback, and destroys the current temporary Player session and all of its settings/state.
- - D-pad navigates clickable elements
- - 1 button rewinds 10 seconds
- - 2 button starts the previous recording in display order at 0:00 if previous exists, or the last recording in display order at 0:00 if currently playing is first. Does nothing if only one recording is in the series.
- - 3 button fast-forwards 10 seconds
- - 4 button rewinds 60 seconds
- - 5 button starts the next recording in display order at 0:00 if next exists, or the first recording in display order at 0:00 if currently playing is last. Does nothing if only one recording is in the series.
- - 6 button fast-forwards 60 seconds
- - 7 button rewinds 600 seconds
- - 8 button cycles repeat setting
- - 9 button fast-forwards 600 seconds
- - * button rewinds 3600 seconds
- - 0 button adds 10 minutes to sleep timer
- - \# button fast-forwards 3600 seconds
+The MP3s can be copied off the phone and played by normal audio software without Soneme Recorder.
 
-#### Main Content
+## Interrupted Recording Recovery
 
-Literally just the Soneme Audiobooks player minus the tab, and minus persistence, and minus stored data per track like last sleep timer set.
+Recorder is intentionally conservative about losing audio.
 
-Recordings are navigated in the same order shown in Recordings view: newest first. Previous means the row above and Next means the row below, with wrapping at either end. Repeat All follows this same display order.
+While a recording is active, encoded MP3 data is written to a temporary file in the Series folder. Recorder does not depend on keeping the entire recording in memory until Finish is pressed.
 
-Closing the flip or turning off the display does not exit Player; playback continues, and reopening the phone reconnects to the same temporary Player session. Back to Recordings is what exits Player.
+If the app, process, or phone is interrupted before a recording can be finished normally, reopen Recorder with the same storage available. Recorder scans for interrupted recordings and, when usable MP3 frames exist, asks you to enter a title or discard the recovered audio.
 
-Data like playback position, sleep timer, repeat behavior, seek intervals, speed, etc. live only for that Player session and are discarded when Player is exited with Back. Reopening a recording later starts a completely fresh Player session.
+If the final MP3 frame was cut off by the interruption, Recorder keeps the complete frames before it and ignores the incomplete tail.
 
-Check image at https://github.com/userexec/soneme-audiobooks/raw/master/screenshot-player.png?raw=true for a visual layout of these features.
+Saving is also staged so the original temporary recording is not deleted until the finished MP3 has been completely written and committed. A failed save therefore normally leaves the temporary recording available for another recovery attempt.
 
-Sleep timer remaining countdown in format h:m. Click on sleep timer opens sleep menu.
-Repeat icon that reflects current setting. Click on repeat icon opens repeat menu with options for Off, Repeat 1, and Repeat All.
-Playback speed indicator that reflects current setting. Click on playback speed indicator opens playback speed menu with options for 0.5x, 0.75x, 1x, 1.25x, 1.5x, 1.75x, 2x, 3x, and 4x. 
-Wiper indicator of current playing position. When wiper focused, clicking left button rewinds by interval setting, clicking right fast-forwards by interval setting. Holding left or right pauses the audio, repeats their action once per second until hold released, then returns to playing audio in the new position.
-Above wiper, time elapsed on left of wiper in format h:mm:ss. Time remaining on right of wiper in format h:mm:ss. Total track time and listening progress in center of wiper in format "1h 40m - 47%".
-Play/pause indicator below wiper.
-Previous and Next track buttons to jump to recordings in current series. Grayed out if only one recording is in series.
-Rewind and Fast-forward indicators with numbers associated with each per settings in Rewind Interval modal and Fast-forward Interval modal. Settings are expressed here as 10s, 1m, 10m, and 1h to save space. Clicking them rewinds or fast-forwards by the selected interval. Holding them opens their respective modal to adjust their interval setting.
-Sleep and repeat changes via keypad controls should have matching haptics to Soneme Audiobooks.
+Calibration is not recoverable because calibration intentionally creates no recording file.
 
-### Options menu
+## Player
 
- - Controls
+Recorder's Player is closely based on Soneme Audiobooks and is intended to be equally usable from the keypad.
 
-   Lists controls by button in order 1,2,3,4,5,6,7,8,9,*,0,# in a modal. Back button exits modal.
+The Player provides:
 
- - Play/Pause (contextual if file is playing)
+* Sleep timer
+* Repeat Off, Repeat 1, and Repeat All
+* Playback speeds from 0.5x through 4x
+* Elapsed, remaining, total, and percentage progress
+* Seek wiper
+* Play/Pause
+* Previous/Next recording
+* Adjustable Rewind/Fast-forward intervals
 
-   Plays and pauses the audio
+Closing the flip or turning off the display does not exit the Player. Playback continues and reopening the phone reconnects to the same Player session.
 
- - Sleep
+Pressing **Back** to return to Recordings is different: it ends that Player session. Playback position, speed, repeat mode, sleep timer, and seek interval changes are intentionally not saved for the next time the recording is opened.
 
-   Menu with options for Off, 10 minutes, 30 minutes, 1 hour, 2 hours, 3 hours, 4 hours, 8 hours, 12 hours. Timer begins whenever set, audio pauses when timer runs out. Back button exits modal without setting (sleep timer already in progress should not be affected). Default setting Off.
+Previous and Next follow the same newest-first order shown in the Recordings list and wrap around at either end when more than one recording exists.
+
+## Player Keypad Shortcuts
+
+| Key | Action |
+| --- | --- |
+| `1` | Rewind 10 seconds |
+| `2` | Previous recording |
+| `3` | Forward 10 seconds |
+| `4` | Rewind 1 minute |
+| `5` | Next recording |
+| `6` | Forward 1 minute |
+| `7` | Rewind 10 minutes |
+| `8` | Cycle Repeat mode |
+| `9` | Forward 10 minutes |
+| `*` | Rewind 1 hour |
+| `0` | Add 10 minutes to the sleep timer |
+| `#` | Forward 1 hour |
+
+The Player softkeys are:
+
+* **Left:** Controls
+* **Center:** Play/Pause
+* **Right:** Sleep
+
+Pressing `8` uses the same repeat-mode vibration patterns as Soneme Audiobooks, and pressing `0` gives a short vibration when ten minutes are added to the sleep timer.
+
+The on-screen Rewind and Fast-forward buttons can be held to change their interval between 10 seconds, 1 minute, 10 minutes, and 1 hour.
+
+## Storage and Privacy
+
+Soneme Recorder is intentionally local-only.
+
+It does not require:
+
+* an account,
+* internet access while running,
+* cloud storage,
+* Google Play Services,
+* analytics,
+* advertising,
+* or a subscription.
+
+The application does not request Android's Internet permission.
+
+Microphone access is used for Calibrate and Record. Finished recordings are stored only in the `SonemeRecorder` location you selected. Recorder's private application storage holds only small configuration/state information such as the persisted storage-folder reference.
+
+## Building
+
+Soneme Recorder is a Gradle Android project with a small native LAME MP3 encoder component.
+
+The build environment requires:
+
+* JDK 17 or newer
+* Android SDK platform 34 and build tools
+* Android NDK 27.0.12077973
+* CMake 3.22.1
+* Git
+
+Build a debug APK with:
+
+```sh
+./gradlew assembleDebug
+```
+
+For a configured signed release build:
+
+```sh
+export SONEME_KEYSTORE=/path/to/keystore.jks
+export SONEME_STORE_PASSWORD='...'
+export SONEME_KEY_PASSWORD='...'
+./gradlew assembleRelease
+```
+
+The configured release key alias is `soneme`.
+
+The resulting APK is written beneath:
+
+```text
+app/build/outputs/apk/
+```
+
+The first build needs internet access so Gradle can obtain its dependencies and the native build can fetch the pinned Android-adjusted LAME 3.100 source tree. The application itself does not need internet access at runtime.
+
+See `BUILDING.md` for build-environment notes and `THIRD_PARTY_NOTICES.md` for the LAME licensing/source information.
