@@ -1,6 +1,6 @@
 # Soneme Recorder
 
-![Soneme Recorder Icon](https://github.com/userexec/soneme-recorder/blob/master/soneme_recorder_icon.svg?raw=true)
+![Soneme Recorder Icon](https://github.com/userexec/soneme-recorder/blob/master/soneme_recorder_icon.png?raw=true)
 
 Soneme Recorder is a small, keypad-friendly Android voice recorder built around structured, repeatable recordings rather than a giant undifferentiated pile of voice memos.
 
